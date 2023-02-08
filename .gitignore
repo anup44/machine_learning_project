@@ -2,3 +2,4 @@ meta_df.parquet
 meta_Electronics.json.gz
 Electronics_5.json
 Electronics.csv
+.DS_Store
