@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Impact Bootstrap Template - Portfolio Details</title>
+  <title>ML Project</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -589,7 +589,305 @@ fig.show()</code></pre>
 
               <h1>Heirarchical Clustering</h1>
 
+              <p>In this section we will use another clustering method, the agglomerative heirarchical clustering to perform analysis on the dataset. We will again try to understand what are the type of points that cluster together and are there any inherent relationships between these clusters and characteristics in our dataset. We will try to understand if the points that are clustered together have any pattern or anything in common and if so, we will try to reason why this might be possible.</p>
 
+              <p>The distance metric that we will be using for heirarchical clustering is cosine distance. It is defined as follows</p>
+
+              <p style="color:#008374;">$$ {cosine \ distance = 1 - \frac{A.B}{\left|A\right|\left|B\right|}} $$</p>
+              <p>where code A and B are two vectors whose distance needs to be calculated.</p>
+
+              <h3>Data Preparation and Code</h3>
+              <p>We already have the vectorized text that was created in the last section. Out of the CountVectorizer and TfidfVectorizer, we will use the vectors created using TfidfVectorizer, since they are better at assigning importance to words. We will run heirarchical clustering in R. So lets first load the vectorized reviews.</p>
+
+              <pre><code class="language-html line-numbers">reviews <- read_csv('tokens_vectorized.csv')
+reviews = reviews[-1]
+head(reviews)</code></pre>
+
+              <p>In the above snippet, we load the stored vectors from csv format and remove the index column. The first few rows look as shown below.</p>
+
+              <pre><code class="language-css"># A tibble: 6 × 14,169
+  `00` `000` `00001` `00013` `000cst` `0017` `0023` `003` 00307…¹ `004a` `0068` `00pm`  `01` `010` `015`  `02` `02mb` 02rg2…²
+  <dbl> <dbl>   <dbl>   <dbl>    <dbl>  <dbl>  <dbl> <dbl>   <dbl>  <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>   <dbl>
+1     0     0       0       0        0      0      0     0       0      0      0      0     0     0     0     0      0       0
+2     0     0       0       0        0      0      0     0       0      0      0      0     0     0     0     0      0       0
+3     0     0       0       0        0      0      0     0       0      0      0      0     0     0     0     0      0       0
+4     0     0       0       0        0      0      0     0       0      0      0      0     0     0     0     0      0       0
+5     0     0       0       0        0      0      0     0       0      0      0      0     0     0     0     0      0       0
+6     0     0       0       0        0      0      0     0       0      0      0      0     0     0     0     0      0       0
+# … with 14,151 more variables: `03` <dbl>, `03rg20` <dbl>, `04` <dbl>, `05` <dbl>, `06` <dbl>, `067` <dbl>, `07` <dbl>,
+#   `08` <dbl>, `09` <dbl>, `0a` <dbl>, `0mhz` <dbl>, `0x` <dbl>, `0x054d` <dbl>, `0x0551` <dbl>, `0x0553` <dbl>,
+#   `0x0555` <dbl>, `0x0557` <dbl>, `0x0559` <dbl>, `0x0563` <dbl>, `0x0565` <dbl>, `0x0567` <dbl>, `0x09e9` <dbl>,
+#   `0x09eb` <dbl>, `0x09ed` <dbl>, `0x09ef` <dbl>, `0x8199` <dbl>, `10` <dbl>, `100` <dbl>, `1000` <dbl>, `10000` <dbl>,
+#   `1000w` <dbl>, `1000watt` <dbl>, `1000yds` <dbl>, `1001` <dbl>, `1001p` <dbl>, `1001st` <dbl>, `1004` <dbl>,
+#   `1005` <dbl>, `1005ha` <dbl>, `1005pe` <dbl>, `100baset` <dbl>, `100c` <dbl>, `100d` <dbl>, `100i` <dbl>, `100iv2` <dbl>,
+#   `100mb` <dbl>, `100mbit` <dbl>, `100mbps` <dbl>, `100percent` <dbl>, `100s` <dbl>, `100th` <dbl>, `100w` <dbl>, …
+# ℹ Use `colnames()` to see all variable names</code></pre>
+
+              <p>The column names in the output above indicates the word and the values in a corresponding row indicates the vale of the word in that document as computed by <code>TfidfVectorizer</code>. </p>
+
+              <p>As the next step, we will compute the cosine distance matrix for all the rows in out data.</p>
+
+              <pre><code class="language-html line-numbers">scaled = scale(t(reviews))
+scaled[is.na(scaled)] = 0
+scaled = as.matrix(scaled)
+
+sim1 <- scaled / sqrt(colSums(scaled * scaled))
+sim1[is.na(sim1)] = 0
+sim1[is.infinite(sim1)] = 0
+
+sim <- t(sim1) %*% sim1
+dim(sim) 
+cos_dist = as.dist(1 - sim)</code></pre>
+              
+              <p>This snippet first scales all the vecors in the dataset. It then divides every vector by its magnitude and converts every vector into a unit vector. Now the dot product of these vectors should directly give us the cosine similarity. Finally we substract the cosine similarity from 1 to get the cosine distance.</p>
+
+              <p>The output of <code>dim(sim)</code> line is shown below.</p>
+
+              <pre><code class="language-css">[1] 5921 5921</code></pre>
+
+              <p>This makes sense as we have 5921 vectors.</p>
+
+              <p>Now that we have out distance matrix, we can use it to run heirarchical clustering on the vectors.</p>
+
+              <pre><code class="language-html line-numbers">hclust_avg <- hclust(cos_dist, method = 'average')
+hclust_ward <- hclust(cos_dist, method = 'ward.D')
+hclust_comp <- hclust(cos_dist, method = 'complete')
+              </code></pre>
+
+              <p>This clustering results using cosine distance for our dataset using different linkage methods are stored in <code>hclust_avg</code>, <code>hclust_ward</code> and <code>hclust_comp</code></p>
+
+              <h3>Results</h3>
+
+              <p>Lets analyse our results to see what kind of clusters are created using each method.</p>
+
+              <p>We will first plot the dendrograms using <code>dendextend</code> for each of the linkage methods.</p>
+
+              <pre><code class="language-html line-numbers">hclust_avg <- hclust(cos_dist, method = 'average')
+hcd <- as.dendrogram(hclust_avg)
+cut_avg <- cutree(hclust_avg, k = 10)
+
+avg_col_dend <- color_labels(color_branches(hcd, k = 10), k = 10)
+avg_col_dend <- assign_values_to_leaves_nodePar(avg_col_dend, 0.2, "lab.cex")
+
+nodePar <- list(lab.cex = 0.1,
+                cex = 0.07)
+plot(avg_col_dend, 
+      main="Dendogram for hclust using 'average' method for 10 colored clusters", 
+      nodePar=nodePar)</code></pre>
+
+              <p>The produced dendrogram looks as follows.</p>
+
+              <img class="img-fluid rounded-4 mb-4" src="assets/img/plot_dend_hclust_ave.png">
+
+              <p>Repeating the process for <code>ward.D</code> and <code>complete methods we get the following.</code></p>
+
+              <pre><code class="language-html line-numbers">hclust_ward <- hclust(cos_dist, method = 'ward.D')
+hcd_ward <- as.dendrogram(hclust_ward)
+cut_ward <- cutree(hclust_ward, k = 10)
+
+ward_col_dend <- color_labels(color_branches(hcd_ward, k = 10), k = 10)
+ward_col_dend <- assign_values_to_leaves_nodePar(ward_col_dend, 0.2, "lab.cex")
+
+nodePar <- list(lab.cex = 0.1,
+                cex = 0.07)
+plot(ward_col_dend, 
+      main="Dendogram for hclust using 'ward.D' method for 10 colored clusters", 
+      nodePar=nodePar)</code></pre>
+
+              <p>Result:</p>
+
+              <img class="img-fluid rounded-4 mb-4" src="assets/img/plot_dend_hclust_ward.png">
+
+              <pre><code class="language-html line-numbers">hclust_comp <- hclust(cos_dist, method = 'complete')
+hcd_comp <- as.dendrogram(hclust_comp)
+cut_comp <- cutree(hclust_comp, k = 10)
+
+comp_col_dend <- color_labels(color_branches(hcd_comp, k = 10), k = 10)
+comp_col_dend <- assign_values_to_leaves_nodePar(comp_col_dend, 0.2, "lab.cex")
+
+nodePar <- list(lab.cex = 0.1,
+                cex = 0.07)
+plot(comp_col_dend, 
+      main="Dendogram for hclust using 'complete' method for 10 colored clusters", 
+      nodePar=nodePar)</code></pre>
+                
+              <p>Result:</p>
+                
+              <img class="img-fluid rounded-4 mb-4" src="assets/img/plot_dend_hclust_complete.png">
+
+              <p>Looking at the results, we can already see that the clustering for the <code>average</code> method is not so good since it creates 1 very large cluster having almost all the elements. The results for <code>ward.D</code> and <code>complete</code> are better but we cannot compare and analyse the results with respect to our dataset since the number of labels on the x axis are too large to differetiate between. So, lets use some other visualization techniques to makwe this analysis.</p>
+
+              <p>We will start with observing how many points are assigned to each cluster is each of the methods.</p>
+
+              <pre><code class="language-html line-numbers">reviews_cl <- mutate(reviews, cluster = cut_avg)
+count(reviews_cl, cluster)
+
+ggplot(reviews_cl, aes(x = cluster)) + 
+  geom_histogram(binwidth=1, color='black') +
+  stat_bin(binwidth=1, geom='text', color='white', size=4,
+           aes(label=..count..), position=position_stack(vjust=0.5)) +
+  labs(title="Histogram of cluster centers for 'average' method") + 
+  theme(plot.title = element_text(size=14, face="bold"))
+
+reviews_cl <- mutate(reviews, cluster = cut_ward)
+count(reviews_cl, cluster)
+
+ggplot(reviews_cl, aes(x = cluster)) + 
+  geom_histogram(binwidth=1, color='black') +
+  stat_bin(binwidth=1, geom='text', color='white', size=4,
+           aes(label=..count..), position=position_stack(vjust=0.5)) +
+  labs(title="Histogram of cluster centers for 'ward.D' method") + 
+  theme(plot.title = element_text(size=14, face="bold"))
+
+reviews_cl <- mutate(reviews, cluster = cut_comp)
+count(reviews_cl, cluster)
+
+ggplot(reviews_cl, aes(x = cluster)) + 
+  geom_histogram(binwidth=1, color='black') +
+  stat_bin(binwidth=1, geom='text', color='white', size=4,
+           aes(label=..count..), position=position_stack(vjust=0.5)) +
+  labs(title="Histogram of cluster centers for 'complete' method") + 
+  theme(plot.title = element_text(size=14, face="bold"))</code></pre>
+
+            <p>This snippet yields the histogram plots for number of points in each cluster for the three methods.</p>
+
+            <div class="position-relative h-100">
+              <div class="slides-1 portfolio-details-slider swiper swiper1">
+                <div class="swiper-wrapper align-items-center">
+
+                  <div class="swiper-slide">
+                    <img class="swiper-slide-image" src="assets/img/plot_hclust_hist_avg.png" alt="">
+                    <div class="swiper-slide-content">
+                    </div>
+                  </div>
+
+                  <div class="swiper-slide">
+                    <img class="swiper-slide-image" src="assets/img/plot_hclust_hist_ward.png" alt="">
+                    <div class="swiper-slide-content">
+                    </div>
+                  </div>
+
+                  <div class="swiper-slide">
+                    <img class="swiper-slide-image" src="assets/img/plot_hclust_hist_comp.png" alt="">
+                    <div class="swiper-slide-content">
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-pagination"></div>
+              </div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+
+            </div>
+
+            <p>We see that the distrubution is best in case of complete and better still in case of average method. But we still need to visualize better to observe relationships within our dataset.</p>
+
+                  <p>Lets plot the clusters in 2D like we did during the analysis in K-Means clustering. To do this, we will load in the 2D representation that we had generated using TSNE during the KMeans analysis. We will also read in the ratings and category data from our <code>merged_df</code>.</p>
+
+                  <pre><code class="language-html line-numbers">points = read_csv("trans_points.csv")
+rat_cat = read_csv('rating_category.csv')[-1]
+dim(points)
+dim(rat_cat)
+colnames(rat_cat)[1] = 'review_rating'</code></pre>
+
+                  <p>This yields the following dimensions for <code>points</code> and <code>rat_cat</code>.</p>
+
+                  <pre><code class="language-css">> dim(points)
+[1] 5921    2
+> dim(rat_cat)
+[1] 5921    2</code></pre>
+
+              <p>We will add this information to the <code>reviews_cl</code> dataframe.</p>
+
+              <pre><code class="language-html line-numbers">reviews_cl1 = bind_cols(reviews_cl, points)
+reviews_cl1 = bind_cols(reviews_cl1, rat_cat)</code></pre>
+
+              <p>Now we will plot these points only for ward.D and complete methods as we know average method has not generated useful clusters.</p>
+
+              <pre><code class="language-html line-numbers">reviews_cl1 <- mutate(reviews_cl1, cluster = cut_ward)
+
+ggplot(reviews_cl1, aes(x = x, y = y, shape = factor(review_rating), color = factor(cluster))) + 
+  geom_point() +
+  labs(title="Scatter plot of clusters for 'ward.D' method") + 
+  theme(plot.title = element_text(size=14, face="bold"))
+
+
+reviews_cl1 <- mutate(reviews_cl1, cluster = cut_comp)
+
+ggplot(reviews_cl1, aes(x = x, y = y, shape = factor(review_rating), color = factor(cluster))) + 
+  geom_point() +
+  labs(title="Scatter plot of clusters for 'complete' method") + 
+  theme(plot.title = element_text(size=14, face="bold"))</code></pre>
+
+              <p>This generated the following 2 plots.</p>
+
+              <img class="img-fluid rounded-4 mb-4" src="assets/img/plot_hclust_scatter_ward.png">
+              <img class="img-fluid rounded-4 mb-4" src="assets/img/plot_hclust_scatter_comp.png">
+
+              <p> As in case of KMeans, the clusters still look mixed up. Lets plot the heatmaps to visualize the separation for <code>rating</code> and <code>category_1</code> columns.</p>
+
+              <pre><code class="language-html line-numbers">reviews_cl1 <- mutate(reviews_cl1, cluster = cut_ward)
+
+ggplot(reviews_cl1, aes(x = factor(review_rating), y = factor(cluster))) + 
+  geom_bin_2d() +
+  stat_bin2d(geom='text', color='white', size=4, aes(label=..count..)) +
+  labs(title="2D histogram plot of clusters index vs review rating for 'ward.D' method") + 
+  theme(plot.title = element_text(size=14, face="bold"))
+
+ggplot(reviews_cl1, aes(x = factor(category_1), y = factor(cluster))) + 
+  geom_bin_2d() +
+  stat_bin2d(geom='text', color='white', size=4, aes(label=..count..)) +
+  labs(title="2D histogram plot of clusters index vs category for 'ward.D' method") + 
+  theme(plot.title = element_text(size=14, face="bold"),
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+
+reviews_cl1 <- mutate(reviews_cl1, cluster = cut_comp)
+
+ggplot(reviews_cl1, aes(x = factor(review_rating), y = factor(cluster))) + 
+  geom_bin_2d() +
+  stat_bin2d(geom='text', color='white', size=4, aes(label=..count..)) +
+  labs(title="2D histogram plot of clusters index vs review rating for 'complete' method") + 
+  theme(plot.title = element_text(size=14, face="bold"))
+
+ggplot(reviews_cl1, aes(x = factor(category_1), y = factor(cluster))) + 
+  geom_bin_2d() +
+  stat_bin2d(geom='text', color='white', size=4, aes(label=..count..)) +
+  labs(title="2D histogram plot of clusters index vs category for 'complete' method") + 
+  theme(plot.title = element_text(size=14, face="bold"),
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))</code></pre>
+
+              <p>The resulting plots from this code are shown below.</p>
+
+              <img class="img-fluid rounded-4 mb-4" src="assets/img/plot_hclust_2dhist_ward.png">
+              <img class="img-fluid rounded-4 mb-4" src="assets/img/plot_hclust_2dhist_cat_ward.png">
+              <img class="img-fluid rounded-4 mb-4" src="assets/img/plot_hclust_2dhist_comp.png">
+              <img class="img-fluid rounded-4 mb-4" src="assets/img/plot_hclust_2dhist_cat_comp.png">
+
+            <p>The plots for cluster vs rating for both the methods show that there is hardly any relation. The situation is same in case of cluster vs category in case of ward.D. Most the points from all categories are assigned to 1 large cluster and the smaller cluster do not have any good separation as well. But the last plot between cluster and category using complete method shows some interesting results. Lets discuss some patterns.</p>
+
+            <div class="about">
+              <div class="content">
+              <ul>
+                <li><i class="bi bi-circle-fill"></i>We see that the <code>Computer & Accesories</code> category has most points in the cluster 5.</li>
+                <li><i class="bi bi-circle-fill"></i><code>Headphones</code> has a large number of points in cluster 8.</li>
+                <li><i class="bi bi-circle-fill"></i>Although <code>Camera & Photo</code> has a large number of points in cluster 5, it also has a large number of points in cluster 3 and hence there is some observable separation.</li>
+                <li><i class="bi bi-circle-fill"></i>We observe that <code>Portable Audio & Video</code> has most points in cluster 5 and 8. This is very similar to distribution of <code>Headphones</code> category and this makes sense since headphones are also portable audio devices.</li>
+                <li><i class="bi bi-circle-fill"></i><code>Wearable Technology</code> has the most points in cluster 6.</li>
+              </ul>
+              </div>
+            </div>
+
+            <h2>Conclusion</h2>
+            <p>We have made quite a few observations while performing all the analysis above using K-Means clustering and heirarchical clustering. Our goal was to determine of clustering data using similarity measures, can help us find some patterns wothin the dataset and to observe what methods and measures of distance provide what information. In out analysis using using K-Means clustering, we first made use of numerical columns in our dataset. We observed that the numerical columns in the dataset contained very sparce information. The column <code>found_helpful</code> comtained very skewed data and had mostly <code>0 and 1</code> in a large percent of the rows. Therefore it did not hold a lot of information required to differetiate points in our dataset. Similarly the <code>brand</code> column contained few popular barnds and a lot of unpopular brands with just a handful of products. As a result, when it was converted to one-hot encoding, the number of dimension blew-up and not a lot of information was added. The euclidean distance between any two rare brands, for example, would just be sqrt(2) and this would not provide usable distances between data points. Other than these, we had <code>verified_purchase</code> column which was a binary field. All these issues made it difficut to find dissimilarities within points in the dataset.</p>
+
+            <p>Having made these observations, an attempt was made to use the text content of each review to cluster the data as this might hold a lot of information about how good the product is or what the product is good or bad at. Although, while tranforming the text data to vectors that out algorithms can handle, what information is retained greatly depends on what tranformation we use. In this case, CountVectorizer and TfidfVectorizer were used. We did not observe any interesting patterns in both of these cases. The reason might be that we were using vectors with 14k dimensions and only 6K data points.This made the transform vectors very sparce and as a result, euclidean distance was not able to efficiently distinguish between data points. We may also attribute the observed results to the tranformations we used. CountVectorizer contains the counts of all the words used in the data, and as long as a there is very little overlap in the words used, the euclidean distance measure is not going to provide meaningful distances and there is no common dimension to compare on. These claims are also supported by the observed silhouette plots. We found very bad clusters with huge number of points with negative silhouette coefficients. This conveys that KMeans had created clusters where no clear clusters could actually be created.
+            </p>
+
+            <p>We then tried to use heirarchical using cosine similarity. Cosine similarity is expected to work better with hight dimensional sparse data. This time we directly jumped to data transformed using the TfidfVectorizer since our observations during K-Means clustering had confirmed that the numerical data did not contain a lot of information to work with. Here we wanted to observe if the data could be separated into clusters in any meaningful manner. So we computer the distance matrix based on cosine similarity and clustered the data using agglomerative heirarchical clustering. To make analysis we cut the tree at 10 clusters and made analysis to observe patterns in the clusters. We made use of <code>average</code>, <code>ward.D</code> and <code>complete</code> linkage methods for the clustering. We observed that <code>average</code> methods was barely able to distinguish between clusters and created on large cluster with very few points in all other clusters. with <code>ward.D</code>, we did observe some distribution in the number of points in each cluster but there was not notable relationship between these clusters and <code>rating/category</code> columns in the dataset. In case of <code>complete</code> linkage method, we made some interesting observations and the clusters created were able to create some separation with respect to product categories. Although these relationships were not strong, this was the best result we obtained during our analysis in this section. 
+            </p>
+
+            <p>Throughout this analysis we were able to work with and compare the results on clustering using different distance measures and algorithms. Although the final results were not as eciting, we did gain a deeper understanding of our dataset and the workings of the variuos algorithms and methods used.</p>
 
 
             </div>
@@ -656,6 +954,7 @@ fig.show()</code></pre>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
