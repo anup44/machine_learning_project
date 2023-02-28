@@ -110,6 +110,27 @@ ggplot(reviews_cl, aes(x = cluster)) +
   theme(plot.title = element_text(size=14, face="bold"))
 
 
+reviews_cl1 <- mutate(reviews_cl1, cluster = cut_ward)
+
+ggplot(reviews_cl1, aes(x = x, y = y, shape = factor(review_rating), color = factor(cluster))) + 
+  geom_point() +
+  labs(title="Scatter plot of clusters for 'ward.D' method") + 
+  theme(plot.title = element_text(size=14, face="bold"))
+
+ggplot(reviews_cl1, aes(x = factor(review_rating), y = factor(cluster))) + 
+  geom_bin_2d() +
+  stat_bin2d(geom='text', color='white', size=4, aes(label=..count..)) +
+  labs(title="2D histogram plot of clusters index vs review rating for 'ward.D' method") + 
+  theme(plot.title = element_text(size=14, face="bold"))
+
+ggplot(reviews_cl1, aes(x = factor(category_1), y = factor(cluster))) + 
+  geom_bin_2d() +
+  stat_bin2d(geom='text', color='white', size=4, aes(label=..count..)) +
+  labs(title="2D histogram plot of clusters index vs category for 'ward.D' method") + 
+  theme(plot.title = element_text(size=14, face="bold"),
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+
 hclust_comp <- hclust(cos_dist, method = 'complete')
 hcd_comp <- as.dendrogram(hclust_comp)
 cut_comp <- cutree(hclust_comp, k = 10)
@@ -134,12 +155,40 @@ ggplot(reviews_cl, aes(x = cluster)) +
   theme(plot.title = element_text(size=14, face="bold"))
 
 
+reviews_cl1 <- mutate(reviews_cl1, cluster = cut_comp)
+
+ggplot(reviews_cl1, aes(x = x, y = y, shape = factor(review_rating), color = factor(cluster))) + 
+  geom_point() +
+  labs(title="Scatter plot of clusters for 'complete' method") + 
+  theme(plot.title = element_text(size=14, face="bold"))
+
+ggplot(reviews_cl1, aes(x = factor(review_rating), y = factor(cluster))) + 
+  geom_bin_2d() +
+  stat_bin2d(geom='text', color='white', size=4, aes(label=..count..)) +
+  labs(title="2D histogram plot of clusters index vs review rating for 'complete' method") + 
+  theme(plot.title = element_text(size=14, face="bold"))
+
+ggplot(reviews_cl1, aes(x = factor(category_1), y = factor(cluster))) + 
+  geom_bin_2d() +
+  stat_bin2d(geom='text', color='white', size=4, aes(label=..count..)) +
+  labs(title="2D histogram plot of clusters index vs category for 'complete' method") + 
+  theme(plot.title = element_text(size=14, face="bold"),
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+
+
+
+
+
 reviews_cl1 <- mutate(reviews_cl1, cluster = cut_avg)
 count(reviews_cl1, cluster)
 
 ggplot(reviews_cl1, aes(x = x, y = y, shape = factor(review_rating), color = factor(cluster))) + geom_point()
 
-ggplot(reviews_cl1, aes(x = factor(review_rating), y = factor(cluster))) + geom_bin_2d()
+ggplot(reviews_cl1, aes(x = factor(review_rating), y = factor(cluster))) + geom_bin_2d() +
+  stat_bin2d(geom='text', color='white', size=4,
+             aes(label=..count..))
+  
 
 ggplot(reviews_cl1, aes(x = factor(category_1), y = factor(cluster))) + geom_bin_2d() + 
   scale_x_discrete(guide = guide_axis(angle = 90))

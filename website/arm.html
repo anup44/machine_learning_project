@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>ML Project - ARM</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+  <link href="assets/css/prism.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Impact - v1.2.0
+  * Template URL: https://bootstrapmade.com/impact-bootstrap-business-website-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <section id="topbar" class="topbar d-flex align-items-center">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+      <div class="contact-info d-flex align-items-center">
+        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">Anup.Bhutada@colorado.edu</a></i>
+        <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 720 312 8601</span></i>
+      </div>
+      <div class="social-links d-none d-md-flex align-items-center">
+        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+      </div>
+    </div>
+  </section><!-- End Top Bar -->
+
+  <header id="header" class="header d-flex align-items-center">
+
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1>CSCI 5622 Machine Learning<span>.</span></h1>
+      </a>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#about">Introduction</a></li>
+          <li><a href="dataprep.html">Data Prep & EDA</a></li>
+          <li><a href="#portfolio">Conclusion</a></li>
+          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="clustering.html">Clustering</a></li>
+              <!-- <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                <ul>
+                  <li><a href="#">Deep Drop Down 1</a></li>
+                  <li><a href="#">Deep Drop Down 2</a></li>
+                  <li><a href="#">Deep Drop Down 3</a></li>
+                  <li><a href="#">Deep Drop Down 4</a></li>
+                  <li><a href="#">Deep Drop Down 5</a></li>
+                </ul>
+              </li> -->
+              <li><a href="#">ARM</a></li>
+              <li><a href="#">NaiveBayes</a></li>
+              <li><a href="#">DecTrees</a></li>
+              <li><a href="#">Regression</a></li>
+              <li><a href="#">Neural Networks</a></li>
+            </ul>
+          </li>
+          <!-- <li><a href="#contact">Contact</a></li> -->
+        </ul>
+      </nav><!-- .navbar -->
+
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+
+    </div>
+  </header><!-- End Header -->
+  <!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+      <div class="page-header d-flex align-items-center" style="background-image: url('');">
+        <div class="container position-relative">
+          <div class="row d-flex justify-content-center">
+            <div class="col-lg-6 text-center">
+              <h2>Association Rules Mining</h2>
+              <!-- <p>Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav>
+        <div class="container">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li>ARM</li>
+          </ol>
+        </div>
+      </nav>
+    </div><!-- End Breadcrumbs -->
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="container" data-aos="fade-up">
+        <div class="row justify-content-between gy-4 mt-4">
+          <div class="col-lg-10">
+            <div class="portfolio-description">
+              <h2>Overview</h2>
+
+              <p>
+                Association Rule Mining (ARM) is a data mining technique used to identify frequent patterns, associations, and correlations between items in a dataset. The goal of ARM is to discover relationships between different items and to identify the items that tend to co-occur frequently in a dataset. This technique is widely used in market basket analysis, web usage mining, and recommendation systems.
+              </p>
+
+              <img class="img-fluid rounded-4 mb-4" src="assets/img/arm_pic1.png">
+
+              <p>
+                One of the key measures used in ARM is support, which is the proportion of transactions in the dataset that contain both the items of interest. Support measures the popularity of an itemset and helps to identify the most frequent itemsets in the dataset. Another important measure in ARM is confidence, which is the proportion of transactions that contain the consequent item given that they also contain the antecedent item. Confidence measures the strength of the association between two items and helps to identify the most reliable associations in the dataset. Finally, lift is another measure used in ARM that compares the probability of two items co-occurring to the probability of them occurring independently. Lift measures the degree of association between two items and helps to identify the most interesting and significant associations in the dataset. Together, these measures can help to determine how effective the resulting associations are and can be used to guide decision-making in various applications.
+              </p>
+
+              <p>Support:
+
+                $$\text{support}(X) = \frac{\text{number of transactions containing } X}{\text{total number of transactions}}$$
+                
+                where $X$ is an itemset of interest.
+                
+                Confidence:
+                
+                $$\text{confidence}(X \Rightarrow Y) = \frac{\text{support}(X \cup Y)}{\text{support}(X)}$$
+                
+                where $X$ is the antecedent itemset and $Y$ is the consequent itemset.
+                
+                Lift:
+                
+                $$\text{lift}(X \Rightarrow Y) = \frac{\text{support}(X \cup Y)}{\text{support}(X) \times \text{support}(Y)}$$
+                
+                where $X$ is the antecedent itemset and $Y$ is the consequent itemset.
+              </p>
+
+              <p>
+                One of the most widely used algorithms for Association Rule Mining is the Apriori algorithm. This algorithm is based on the observation that any subset of a frequent itemset must also be frequent. In other words, if a set of items is frequent, then all of its subsets must also be frequent. The Apriori algorithm works by iteratively generating candidate itemsets of increasing size and pruning those that are infrequent.
+              </p>
+              <p>
+                The Apriori algorithm has two main steps: the join step and the prune step. In the join step, the algorithm generates candidate itemsets of size $k$ by joining frequent itemsets of size $k-1$. For example, if the frequent itemsets of size 2 are {A,B}, {A,C}, and {B,C}, {C,D} then the candidate itemsets of size 3 are {A,B,C} and {A,C,D}. In the prune step, the algorithm checks the support of each candidate itemset and removes those that are infrequent. The frequent itemsets are then used to generate association rules using the support, confidence, and lift measures.
+              </p>
+
+              <img class="img-fluid rounded-4 mb-4" src="assets/img/arm_pic2.webp">
+
+              <p>
+                The Apriori algorithm is an efficient algorithm for mining association rules from large datasets. It uses the concept of the "apriori" property to reduce the number of itemsets that need to be considered and prunes those that are infrequent. This reduces the search space and improves the efficiency of the algorithm. Overall, Association Rule Mining and the Apriori algorithm provide powerful tools for discovering patterns and associations in large datasets.
+              </p>
+
+              <p>In this section, the column <code>also_view</code> is used to explore if associations can be drawn between items that a user views while browsing a product in Amazon. We hope to find associations in the browsing behavior of users since similar products are viewed while looking for a product online. Since we have almost 6k rows in our dataset, and each row contains multiple products that have been viewed, we will not be able to look at individual association rules. Rather, we will plot the rules to observe if we are able to mine meaningful associations between products.
+              </p>
+
+              <h2>Data Prep and Code</h2>
+
+              <p>
+                Since the data was prepared and cleaned in Python (<a href="dataprep.html">Data Prep and EDA</a>), we will have to export the data to csv to be able to use it in R. Since we only need the <code>also_view</code> column, we will write that column to a csv in python.
+              </p>
+
+              <pre><code class="language-python line-numbers">also_viewed = \
+merged_df[merged_df.also_view.apply(lambda x: len(x) > 0)].copy()
+also_viewed.apply(lambda x: pd.Series(list(x.also_view) + [x.asin]), axis=1)\
+          .to_csv('also_viewed_basket.csv', index=False)</code></pre>
+
+
+              <p>
+                This dataframe can be loaded in R to start working on Association Rules Mining. Link to this file is given below.
+              </p>
+
+              <ul><li><a href="https://github.com/anup44/machine_learning_project/blob/main/also_viewed_basket.csv">https://github.com/anup44/machine_learning_project/blob/main/also_viewed_basket.csv</a></li></ul>
+
+              <pre><code class="language-html line-numbers">dataset = read.transactions('also_viewed_basket.csv', 
+                sep = ',', rm.duplicates = TRUE)
+inspect(dataset[1:2])</code></pre>
+
+              <pre><code class="language-css">    items        
+[1] {1059274949, 
+     1059844575, 
+     9791688974, 
+     B00B2HORKE, 
+     B00HFYLR4M, 
+     B00VUW6R2M, 
+     B015DJ4QYI, 
+     B06XQDTXD1, 
+     B078KF8CSX} 
+[2] {1059274949, 
+     1059844575, 
+     9791688974, 
+     B00B2HORKE, 
+     B00HFYLR4M, 
+     B00VUW6R2M, 
+     B015DJ4QYI, 
+     B06XQDTXD1, 
+     B078KF8CSX} </code></pre>
+
+              <p>We have the IDs of products that were viewed while browsing.</p>
+
+              <p>We will first plot the item frequencies to view what support values can be used for building the rules.</p>
+
+              <pre><code class="language-html line-numbers">itemFrequencyPlot(dataset, topN = 10)</code></pre>
+
+              <p>Item frequencies for top 10 items</p>
+
+              <img class="img-fluid rounded-4 mb-4" src="assets/img/arm_item_freq.png">
+
+              <p>We see that the most popular item has a support of a little over <code>0.020</code>. There fore we will use a support of 0.01 for building the association rules.
+              </p>
+
+              <pre><code class="language-html line-numbers">associa_rules = apriori(data = dataset, 
+                parameter = list(support = 0.01, 
+                                 confidence = 0.6,
+                                 maxlen = 5))</code></pre>
+
+              <p>
+                The value of confidence is set to <code>0.6</code>, and <code>maxlen</code> is set to <code>5</code> to prevent very long rules.
+              </p>
+
+              <h2>Results</h2>
+
+              <p>The results of the apriori algorithm are stord in <code>associa_rules</code>. Lets explore how our rules look by viewing the top 15 rules by <code>support</code>, <code>confidence</code> and <code>lift</code>.</p>
+
+              <pre><code class="language-html line-numbers">inspect(sort(associa_rules, by = 'support')[1:15])</code></pre>
+
+              <pre><code class="language-css">     lhs                         rhs          support    confidence coverage   lift     count
+[1]  {B01GCKO9IK}             => {B01GCKO9Z8} 0.02071823 1          0.02071823 48.26667 60   
+[2]  {B01GCKO9Z8}             => {B01GCKO9IK} 0.02071823 1          0.02071823 48.26667 60   
+[3]  {B01GCKO9IK}             => {B004536LUG} 0.02071823 1          0.02071823 48.26667 60   
+[4]  {B004536LUG}             => {B01GCKO9IK} 0.02071823 1          0.02071823 48.26667 60   
+[5]  {B01GCKO9IK}             => {B002EF2200} 0.02071823 1          0.02071823 48.26667 60   
+[6]  {B002EF2200}             => {B01GCKO9IK} 0.02071823 1          0.02071823 48.26667 60   
+[7]  {B01GCKO9Z8}             => {B004536LUG} 0.02071823 1          0.02071823 48.26667 60   
+[8]  {B004536LUG}             => {B01GCKO9Z8} 0.02071823 1          0.02071823 48.26667 60   
+[9]  {B01GCKO9Z8}             => {B002EF2200} 0.02071823 1          0.02071823 48.26667 60   
+[10] {B002EF2200}             => {B01GCKO9Z8} 0.02071823 1          0.02071823 48.26667 60   
+[11] {B004536LUG}             => {B002EF2200} 0.02071823 1          0.02071823 48.26667 60   
+[12] {B002EF2200}             => {B004536LUG} 0.02071823 1          0.02071823 48.26667 60   
+[13] {B01GCKO9IK, B01GCKO9Z8} => {B004536LUG} 0.02071823 1          0.02071823 48.26667 60   
+[14] {B004536LUG, B01GCKO9IK} => {B01GCKO9Z8} 0.02071823 1          0.02071823 48.26667 60   
+[15] {B004536LUG, B01GCKO9Z8} => {B01GCKO9IK} 0.02071823 1          0.02071823 48.26667 60 </code></pre>
+
+              <pre><code class="language-html line-numbers">inspect(sort(associa_rules, by = 'confidence')[1:15])</code></pre>
+
+              <pre><code class="language-css">     lhs             rhs          support    confidence coverage   lift     count
+[1]  {B01GEW27DA} => {B00PHLM7VW} 0.01381215 1          0.01381215 48.26667 40   
+[2]  {B00UMVW4VA} => {B07CVVM115} 0.01070442 1          0.01070442 93.41935 31   
+[3]  {B07CVVM115} => {B00UMVW4VA} 0.01070442 1          0.01070442 93.41935 31   
+[4]  {B00UMVW4VA} => {B002GYTPAE} 0.01070442 1          0.01070442 93.41935 31   
+[5]  {B002GYTPAE} => {B00UMVW4VA} 0.01070442 1          0.01070442 93.41935 31   
+[6]  {B07CVVM115} => {B002GYTPAE} 0.01070442 1          0.01070442 93.41935 31   
+[7]  {B002GYTPAE} => {B07CVVM115} 0.01070442 1          0.01070442 93.41935 31   
+[8]  {B07GQ7JTGG} => {B07GWZX7BY} 0.01139503 1          0.01139503 87.75758 33   
+[9]  {B07GWZX7BY} => {B07GQ7JTGG} 0.01139503 1          0.01139503 87.75758 33   
+[10] {B07GQ7JTGG} => {B01G1BVKKA} 0.01139503 1          0.01139503 87.75758 33   
+[11] {B01G1BVKKA} => {B07GQ7JTGG} 0.01139503 1          0.01139503 87.75758 33   
+[12] {B07GQ7JTGG} => {B078XY7C1F} 0.01139503 1          0.01139503 87.75758 33   
+[13] {B078XY7C1F} => {B07GQ7JTGG} 0.01139503 1          0.01139503 87.75758 33   
+[14] {B07GWZX7BY} => {B01G1BVKKA} 0.01139503 1          0.01139503 87.75758 33   
+[15] {B01G1BVKKA} => {B07GWZX7BY} 0.01139503 1          0.01139503 87.75758 33   </code></pre>
+
+              <pre><code class="language-html line-numbers">inspect(sort(associa_rules, by = 'lift')[1:15])</code></pre>
+
+              <pre><code class="language-css">     lhs                         rhs          support    confidence coverage   lift     count
+[1]  {B015YHXHWQ}             => {B00WL6RDAG} 0.01001381 1          0.01001381 99.86207 29   
+[2]  {B00WL6RDAG}             => {B015YHXHWQ} 0.01001381 1          0.01001381 99.86207 29   
+[3]  {B018IMLQDG}             => {B014658DS0} 0.01035912 1          0.01035912 96.53333 30   
+[4]  {B014658DS0}             => {B018IMLQDG} 0.01035912 1          0.01035912 96.53333 30   
+[5]  {B018IMLQDG}             => {B07CPNR79C} 0.01035912 1          0.01035912 96.53333 30   
+[6]  {B07CPNR79C}             => {B018IMLQDG} 0.01035912 1          0.01035912 96.53333 30   
+[7]  {B014658DS0}             => {B07CPNR79C} 0.01035912 1          0.01035912 96.53333 30   
+[8]  {B07CPNR79C}             => {B014658DS0} 0.01035912 1          0.01035912 96.53333 30   
+[9]  {B014658DS0, B018IMLQDG} => {B07CPNR79C} 0.01035912 1          0.01035912 96.53333 30   
+[10] {B018IMLQDG, B07CPNR79C} => {B014658DS0} 0.01035912 1          0.01035912 96.53333 30   
+[11] {B014658DS0, B07CPNR79C} => {B018IMLQDG} 0.01035912 1          0.01035912 96.53333 30   
+[12] {B00UMVW4VA}             => {B07CVVM115} 0.01070442 1          0.01070442 93.41935 31   
+[13] {B07CVVM115}             => {B00UMVW4VA} 0.01070442 1          0.01070442 93.41935 31   
+[14] {B00UMVW4VA}             => {B002GYTPAE} 0.01070442 1          0.01070442 93.41935 31   
+[15] {B002GYTPAE}             => {B00UMVW4VA} 0.01070442 1          0.01070442 93.41935 31   
+</code></pre>
+
+              <p>Lets observe how many rules have been created.</p>
+
+              <pre><code class="language-html line-numbers">associa_rules</code></pre>
+
+              <pre><code class="language-css">set of 1123580 rules</code></pre>
+
+              <p>
+                We see that we have a very large number of rules. Any kind of visualization would be very difficult to understand with these many rules. So let's create a subset of rules that we think may be of interest and observe their properties.
+              </p>
+
+              <pre><code class="language-html line-numbers">subrules_lift <- sort(associa_rules, by = 'lift')[1:50]
+subrules_conf <- sort(associa_rules, by = 'confidence')[1:50]
+subrules_sup <- sort(associa_rules, by = 'support')[1:50]
+
+subrules <- union(subrules_lift, subrules_conf)
+subrules <- union(subrules, subrules_sup)
+subrules</code></pre>
+
+              <pre><code class="language-css">set of 137 rules</code></pre>
+
+              <p>This is a much more manageable number. Now lets visualize how good these rules are by plotting the support, confidence and lifts.</p>
+
+              <pre><code class="language-html line-numbers">plot(subrules, measure=c("support", "lift"), shading = "confidence")</code></pre>
+
+              The plot generated in shown below.
+
+              <img class="img-fluid rounded-4 mb-4" src="assets/img/arm_scatter_lift_sup.png">
+
+              <p>
+                We see that most of these rules have a confidence of 1. It also interesting to observe that as the support increase, the lift decreases. However, the values of lift are quite high and almost all are greater that 45. We can therefore say that the association between these items is strong.
+              </p>
+
+              <p>Lets visualize these rules using a graph to observe how the elements are realetd within the rules.</p>
+
+              <pre><code class="language-html line-numbers">plot(subrules, method="graph", engine="htmlwidget", measure = "lift")</code></pre>
+
+              <iframe class="col-lg-12" style="height:100vh;" src="arm_graph_widget_lift.html"></iframe>
+
+              <p>The red shades in the graph indicate the lift of the rules plotted.</p>
+
+              <p>
+                We observe a few cluster of rules with item highlt linked to one another. These clusters indicate that these items are frequently observed in the datset. Moreover, the lift and confidence values indicate that these are good rules with significant associations.
+              </p>
+
+              <p>Let us also visualize a few rules that have the maximum support in our dataset. We will select 40 rules to ensure that the graphs are readable</p>
+
+              <pre><code class="language-html line-numbers">subrules_sup_40 <- sort(associa_rules, by = 'support')[1:40]
+plot(subrules_sup_40, method = "graph")</code></pre>
+
+              <img class="img-fluid rounded-4 mb-4" src="assets/img/arm_graph_sup_40.png">
+
+              <p>Again we observe 3 clusters with interconnected items. The lift values for these rules are all between 45 to 60. Although these are the highest lift values in our data, the values are large enough to say that these rules have a good association between items.</p>
+
+              <p>As a final plot, lets plot all the rules in our dataset in a 2D histogram to see how good our rules are and to check the utility of these rules for applications such as recommending items to users while browsing for products.</p>
+
+              <pre><code class="language-html line-numbers">rule_df <- DATAFRAME(associa_rules)
+ggplot(rule_df, aes(x=support, y=lift)) +
+    geom_bin2d() + theme_bw()</code></pre>
+
+              <img class="img-fluid rounded-4 mb-4" src="assets/img/arm_2dhist_lift_sup_conf.png">
+
+              <p>
+                This plot shows that we have a large number of rules with high values of lift and relatively good values of support. These rules are useful in extracting meaningful information about how items are related to each other in the dataset. We can use appropriate filters to select the rules that would have the specific information needed for various analysis.
+              </p>
+
+              <h2>Conclusion</h2>
+
+              <p>
+                In the analysis, it is observed that our data generates about 1.1 million association rule. Although not all rules are very useful, if we are able to find just a few hundred association rules that are meaningful based on their support, confidence and lift values, they could help explain several trends in the way users look for items while browsing. These observations can further be utilized to determine what products are appealing to users and what products people are likely to look for given they are on a certain page. This analysis can also be used to explain why certain products may be performing poorly in the market.
+              </p>
+
+              <p>
+                Out of the 1.1 million rules that are generated, the results and the visualizations provide evidence that a large number of rules are useful. We observe good lift and confidence in out plots and the graphs show tightly grouped clusters confirming that groups of items are highly associated. These rules coupled with popularity and review metrics can be used to craete powerful recommendations for users to enhance the user experience and help make useful products more accessible.
+              </p>
+
+              <p>
+                Further although most of the rules are expected to show associations between closely related products, we can certainly find linking rules that connect two huge clusters. These rules can help explain and understand the relatioships between products, in say different categories, and provide deeper understanding of user behavior on the platform by explaining why these categories may be linked and under what scenarios.
+              </p>
+
+              <p>The analysis helped discover several ways in which association rules mining on large datasets can be analysed through visualization. It helped inderstand how the quality of rules can be assessed based on metrics of support, confidence and lift when each rule cannot be individually studied.</p>
+
+              <p>
+                In conclusion, our analysis of the Amazon reviews dataset using Association Rule Mining (ARM) has provided valuable insights into the relationships and patterns within the data. By using measures such as support, confidence, and lift, we were able to identify frequent itemsets and generate meaningful association rules. These insights can be useful for businesses to better understand customer preferences and improve their product offerings. For example, businesses can use these association rules to identify which products are frequently purchased together and offer them as a bundle, or suggest complementary products to customers.
+              </p>
+              <p>
+                Overall, the ARM analysis has demonstrated the usefulness of this technique for exploring and understanding complex datasets, and can be used in a wide range of applications such as market basket analysis, recommendation systems, and customer segmentation. These insights can help businesses make data-driven decisions to improve their offerings and gain a competitive edge in the market.
+              </p>
+
+              
+            </div>
+
+
+              <div>
+                
+              </div>
+
+              
+
+          <!-- <div class="col-lg-3">
+            <div class="portfolio-info">
+              <h3>Project information</h3>
+              <ul>
+                <li><strong>Category</strong> <span>Web design</span></li>
+                <li><strong>Client</strong> <span>ASU Company</span></li>
+                <li><strong>Project date</strong> <span>01 March, 2020</span></li>
+                <li><strong>Project URL</strong> <a href="#">www.example.com</a></li>
+                <li><a href="#" class="btn-visit align-self-start">Visit Website</a></li>
+              </ul>
+            </div>
+          </div> -->
+
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Details Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+
+    <div class="container">
+      <div class="row gy-4">
+
+        <div class="col-lg-10 col-12 footer-links">
+          <h4>Useful Links</h4>
+          <ul>
+            <li><a href="https://github.com/anup44/machine_learning_project" target="_blank"><strong>All code files:</strong> https://github.com/anup44/machine_learning_project</a></li>
+            <li><a href="https://github.com/anup44/machine_learning_project/blob/main/read_data.ipynb" target="_blank"><strong>Code for collecting and cleaning data:</strong> https://github.com/anup44/machine_learning_project/blob/main/read_data.ipynb"</a></li>
+            <li><a href="https://github.com/anup44/machine_learning_project/blob/main/visualization.ipynb"><strong>Code for data visualizations:</strong> https://github.com/anup44/machine_learning_project/blob/main/visualization.ipynb</a></li>
+            <li><a href="https://jmcauley.ucsd.edu/data/amazon_v2/metaFiles2/meta_Electronics.json.gz"><strong>Amazon products metadata for Electrinics category:</strong> https://jmcauley.ucsd.edu/data/amazon_v2/metaFiles2/meta_Electronics.json.gz</a></li>
+            <li><a href="https://github.com/anup44/machine_learning_project/blob/main/product_reviews_1000.json"><strong>Scraped Product reviews data:</strong> https://github.com/anup44/machine_learning_project/blob/main/product_reviews_1000.json</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+  </footer><!-- End Footer -->
+  <!-- End Footer -->
+
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/prism.js"></script>
+
+</body>
+
+</html>
