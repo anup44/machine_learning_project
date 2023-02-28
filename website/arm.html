@@ -249,6 +249,8 @@ inspect(dataset[1:2])</code></pre>
 
               <pre><code class="language-html line-numbers">inspect(sort(associa_rules, by = 'support')[1:15])</code></pre>
 
+              <p>Below are top 15 rules sorted by support.</p>
+
               <pre><code class="language-css">     lhs                         rhs          support    confidence coverage   lift     count
 [1]  {B01GCKO9IK}             => {B01GCKO9Z8} 0.02071823 1          0.02071823 48.26667 60   
 [2]  {B01GCKO9Z8}             => {B01GCKO9IK} 0.02071823 1          0.02071823 48.26667 60   
@@ -268,6 +270,8 @@ inspect(dataset[1:2])</code></pre>
 
               <pre><code class="language-html line-numbers">inspect(sort(associa_rules, by = 'confidence')[1:15])</code></pre>
 
+              <p>Below are top 15 rules sorted by confidence.</p>
+
               <pre><code class="language-css">     lhs             rhs          support    confidence coverage   lift     count
 [1]  {B01GEW27DA} => {B00PHLM7VW} 0.01381215 1          0.01381215 48.26667 40   
 [2]  {B00UMVW4VA} => {B07CVVM115} 0.01070442 1          0.01070442 93.41935 31   
@@ -286,6 +290,8 @@ inspect(dataset[1:2])</code></pre>
 [15] {B01G1BVKKA} => {B07GWZX7BY} 0.01139503 1          0.01139503 87.75758 33   </code></pre>
 
               <pre><code class="language-html line-numbers">inspect(sort(associa_rules, by = 'lift')[1:15])</code></pre>
+
+              <p>Below are top 15 rules sorted by lift.</p>
 
               <pre><code class="language-css">     lhs                         rhs          support    confidence coverage   lift     count
 [1]  {B015YHXHWQ}             => {B00WL6RDAG} 0.01001381 1          0.01001381 99.86207 29   
@@ -433,10 +439,10 @@ ggplot(rule_df, aes(x=support, y=lift)) +
           <h4>Useful Links</h4>
           <ul>
             <li><a href="https://github.com/anup44/machine_learning_project" target="_blank"><strong>All code files:</strong> https://github.com/anup44/machine_learning_project</a></li>
-            <li><a href="https://github.com/anup44/machine_learning_project/blob/main/read_data.ipynb" target="_blank"><strong>Code for collecting and cleaning data:</strong> https://github.com/anup44/machine_learning_project/blob/main/read_data.ipynb"</a></li>
-            <li><a href="https://github.com/anup44/machine_learning_project/blob/main/visualization.ipynb"><strong>Code for data visualizations:</strong> https://github.com/anup44/machine_learning_project/blob/main/visualization.ipynb</a></li>
             <li><a href="https://jmcauley.ucsd.edu/data/amazon_v2/metaFiles2/meta_Electronics.json.gz"><strong>Amazon products metadata for Electrinics category:</strong> https://jmcauley.ucsd.edu/data/amazon_v2/metaFiles2/meta_Electronics.json.gz</a></li>
             <li><a href="https://github.com/anup44/machine_learning_project/blob/main/product_reviews_1000.json"><strong>Scraped Product reviews data:</strong> https://github.com/anup44/machine_learning_project/blob/main/product_reviews_1000.json</a></li>
+            <li><a href="https://github.com/anup44/machine_learning_project/blob/main/also_viewed_basket.csv"><strong>Basket data for ARM:</strong> https://github.com/anup44/machine_learning_project/blob/main/also_viewed_basket.csv</a></li>
+            <li><a href="https://github.com/anup44/machine_learning_project/blob/main/arm.R" target="_blank"><strong>Code for ARM:</strong> https://github.com/anup44/machine_learning_project/blob/main/arm.R"</a></li>
           </ul>
         </div>
 
