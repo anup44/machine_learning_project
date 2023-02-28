@@ -187,12 +187,15 @@ merged_df[merged_df.also_view.apply(lambda x: len(x) > 0)].copy()
 also_viewed.apply(lambda x: pd.Series(list(x.also_view) + [x.asin]), axis=1)\
           .to_csv('also_viewed_basket.csv', index=False)</code></pre>
 
+              <p>Link to data file and code:</p>
+
+              <ul><li>Data file: <a href="https://github.com/anup44/machine_learning_project/blob/main/also_viewed_basket.csv">https://github.com/anup44/machine_learning_project/blob/main/also_viewed_basket.csv</a></li>
+                <li>ARM Code: <a href="https://github.com/anup44/machine_learning_project/blob/main/arm.R">https://github.com/anup44/machine_learning_project/blob/main/arm.R</a></li>
+              </ul>
 
               <p>
                 This dataframe can be loaded in R to start working on Association Rules Mining. Link to this file is given below.
               </p>
-
-              <ul><li><a href="https://github.com/anup44/machine_learning_project/blob/main/also_viewed_basket.csv">https://github.com/anup44/machine_learning_project/blob/main/also_viewed_basket.csv</a></li></ul>
 
               <pre><code class="language-html line-numbers">dataset = read.transactions('also_viewed_basket.csv', 
                 sep = ',', rm.duplicates = TRUE)
@@ -390,7 +393,7 @@ ggplot(rule_df, aes(x=support, y=lift)) +
                 Overall, the ARM analysis has demonstrated the usefulness of this technique for exploring and understanding complex datasets, and can be used in a wide range of applications such as market basket analysis, recommendation systems, and customer segmentation. These insights can help businesses make data-driven decisions to improve their offerings and gain a competitive edge in the market.
               </p>
 
-              
+
             </div>
 
 

@@ -85,11 +85,11 @@ ggplot(rule_df, aes(x=lift, y=confidence)) +
 ggplot(rule_df, aes(x=support, y=lift)) +
   geom_bin2d() + theme_bw()
 
-rule_df %>% pull(LHS) %>% .[1]
+# rule_df %>% pull(LHS) %>% .[1]
 
-item_counts <- sapply(associa_rules, function(x) length(lhs(x)) + length(rhs(x)))
+# item_counts <- sapply(associa_rules, function(x) length(lhs(x)) + length(rhs(x)))
 
-rules = inspect(associa_rules)
+# rules = inspect(associa_rules)
 
 plot(subrules_lift, method = "graph")
 plot(subrules_lift, method="graph", engine="interactive", measure = "lift")
@@ -110,4 +110,4 @@ saveWidget(
 
 plot(subrules_sup_40, method = "graph")
 
-sel <- plot(subrules_lift, measure=c("support", "lift"), shading = "confidence",interactive = TRUE)
+# sel <- plot(subrules_lift, measure=c("support", "lift"), shading = "confidence",interactive = TRUE)
