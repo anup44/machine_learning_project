@@ -732,7 +732,7 @@ plot(avg_col_dend,
 
               <img class="img-fluid rounded-4 mb-4" src="assets/img/plot_dend_hclust_ave.png">
 
-              <p>Repeating the process for <code>ward.D</code> and <code>complete methods we get the following.</code></p>
+              <p>Repeating the process for <code>ward.D</code> and <code>complete</code> methods we get the following.</p>
 
               <pre><code class="language-html line-numbers">hclust_ward <- hclust(cos_dist, method = 'ward.D')
 hcd_ward <- as.dendrogram(hclust_ward)
@@ -751,6 +751,8 @@ plot(ward_col_dend,
 
               <img class="img-fluid rounded-4 mb-4" src="assets/img/plot_dend_hclust_ward.png">
 
+              <p>We can observe this dendogram to infer the number of clusters that it suggests. The plot shows that no matter where we cut, we are going to get some very small clusters at the left end or right end of the graph. But let's try to guess to our best judgement a value of number of clusters (k) that looks good. We can say that the selected value of <code>k=10</code> does a good job at preventing very small clusters and so may be a good suggestion. But lets try to break the large cluster down just a bit so that we have some clusters that are tightly packed and some very small clusters that may carry little meaning. Lets cut the dendogram at <code>height of 10</code>. When moving from right to left, we get one tightly packed cluster at the right end, we get a large cluster that is spread out, then a bunch of small clusters, a few mid sized clusters and then some very small clusters. In doing so, we have a total of <code>k=17</code> clusters. This may be another suggestion that the denogram gives us other than <code>k=10</code>. Although, the dendrogram does not provide a suggestion for a value of k that may be ideal, it does suggest values of <code>10 and 17</code>, each of which try to address avoiding small clusters vs avoiding large clusters.</p>
+
               <pre><code class="language-html line-numbers">hclust_comp <- hclust(cos_dist, method = 'complete')
 hcd_comp <- as.dendrogram(hclust_comp)
 cut_comp <- cutree(hclust_comp, k = 10)
@@ -768,7 +770,7 @@ plot(comp_col_dend,
                 
               <img class="img-fluid rounded-4 mb-4" src="assets/img/plot_dend_hclust_complete.png">
 
-              <p>Looking at the results, we can already see that the clustering for the <code>average</code> method is not so good since it creates 1 very large cluster having almost all the elements. The results for <code>ward.D</code> and <code>complete</code> are better but we cannot compare and analyse the results with respect to our dataset since the number of labels on the x axis are too large to differetiate between. So, lets use some other visualization techniques to makwe this analysis.</p>
+              <p>Looking at the results, we can already see that the clustering for the <code>average</code> method is not so good since it creates 1 very large cluster having almost all the elements. The results for <code>ward.D</code> and <code>complete</code> are better but we cannot compare and analyse the results with respect to our dataset since the number of labels on the x axis are too large to differetiate between. So, lets use some other visualization techniques to make this analysis.</p>
 
               <p>We will start with observing how many points are assigned to each cluster is each of the methods.</p>
 
