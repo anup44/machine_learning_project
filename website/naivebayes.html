@@ -139,12 +139,15 @@
                 Naive bayes classifier works by utilizing the training dataset to estimate parameters required to define the corresponding probability distribution. These estimated parameters are utilized to predict the probabilities of new point for each class and the class with the maximum probability is predicted by naive bayes for the new point. Naive bayes is called naive because it assumes independence in features. That is, the probability for a data point in a class $P(X/c)$ is directly computed as a product of probabilities of individual features $\left(P(f_1/c) \times P(f_2/c) \times ... \times P(f_p/c)\right)$.
               </p>
 
+              <p>
+                Since naive bayes computes joint probabilities by multiplying probabilities of each feature, the joint probabilities can become 0 even if one feature has a probability of 0 in a class. This can lead to wrong predictions even if the class is the most probable depending on other features. To account for this, a smoothing factor $(\alpha)$ is added to the numerator and denominator $(k \times \alpha)$, while computing the conditional probability of a feature for a particular class. This new value, $\theta$, is then used in place of the conditional probability to compute joint probability for a class.
+              </p>
+
               <figure class="d-block text-center">
                 <img src="assets/img/bayes_rule.png" class="figure-img img-fluid rounded mx-auto d-block" alt="A generic square placeholder image with rounded corners in a figure.">
                 <figcaption class="blockquote-footer">
                   Image from <cite title="Source URL">https://www.saedsayad.com/naive_bayesian.htm</cite>
               </figure>
-
 
               <p>
                 Multinomial naive bayes is used for data that contains counts of occurrences of features. For example, a text document can be represented as the counts of each word in the document. Multinomial naive bayes estimates the probability of each feature, or word, in a class and uses this probability to compute the probability of a feature vector belonging to the class.
@@ -162,6 +165,12 @@
 
               <p>
                 Since $P(X)$ is the same for all classes, we do not need to compute the value to compare its probabilities across classes to find the most probable class.
+              </p>
+
+              <p>
+                When smoothing is added, the probability for $feature_i$ in class $c$ is given by
+                $$\theta = \frac{\text{Number of times feature_i appears in class c} + \alpha}{\text{Sum of all occurrences of features in class c} + (p \times \alpha)}$$
+
               </p>
 
               <p>
@@ -191,6 +200,8 @@
               </p>
 
               <p>Shown below is a sample of the dataset used for this part.</p>
+
+              <img class="img-fluid rounded-4 mb-4" src="assets/img/nb_data_sample.png">
 
               <p>
                 Supervised learning methods are used to build models that can make predictions on unseen data. To ensure that these models are able to generalize well and avoid overfitting on the training data, it is essential to split the data into a training set and a testing set. The training set is used to build the model, while the testing set is used to evaluate how well the model performs on new, unseen data. This is important because the data used for training may not be a perfect representation of the population, and so the model may not perform as well on new data. By using a disjoint training and testing set, we can simulate how the model might perform in the real world and account for any bias or overfitting in the model. This is an essential step in developing accurate and reliable machine learning models that can make predictions with high accuracy.
@@ -408,8 +419,8 @@ Car & Vehicle Electronics       0.77      0.29      0.42        35
             <li><a href="https://github.com/anup44/machine_learning_project" target="_blank"><strong>All code files:</strong> https://github.com/anup44/machine_learning_project</a></li>
             <li><a href="https://jmcauley.ucsd.edu/data/amazon_v2/metaFiles2/meta_Electronics.json.gz"><strong>Amazon products metadata for Electrinics category:</strong> https://jmcauley.ucsd.edu/data/amazon_v2/metaFiles2/meta_Electronics.json.gz</a></li>
             <li><a href="https://github.com/anup44/machine_learning_project/blob/main/product_reviews_1000.json"><strong>Scraped Product reviews data:</strong> https://github.com/anup44/machine_learning_project/blob/main/product_reviews_1000.json</a></li>
-            <li><a href="https://github.com/anup44/machine_learning_project/blob/main/also_viewed_basket.csv"><strong>Basket data for ARM:</strong> https://github.com/anup44/machine_learning_project/blob/main/also_viewed_basket.csv</a></li>
-            <li><a href="https://github.com/anup44/machine_learning_project/blob/main/arm.R" target="_blank"><strong>Code for ARM:</strong> https://github.com/anup44/machine_learning_project/blob/main/arm.R"</a></li>
+            <li><a href="https://github.com/anup44/machine_learning_project/blob/main/tokens_count_vectorized_sample.csv"><strong>Count Vectorized sample data:</strong> https://github.com/anup44/machine_learning_project/blob/main/tokens_count_vectorized_sample.csv</a></li>
+            <li><a href="https://github.com/anup44/machine_learning_project/blob/main/naive_bayes.ipynb" target="_blank"><strong>Code for Naive Bayes:</strong> https://github.com/anup44/machine_learning_project/blob/main/naive_bayes.ipynb</a></li>
           </ul>
         </div>
 
