@@ -27,7 +27,7 @@ library(htmlwidgets)
 
 dataset = read.transactions('also_viewed_basket.csv', 
                             sep = ',', rm.duplicates = TRUE)
-inspect(dataset[1:2])
+inspect(dataset[1:4])
 
 itemFrequencyPlot(dataset, topN = 10)
 # Fitting model
@@ -45,6 +45,13 @@ associa_rules = apriori(data = dataset,
 inspect(sort(associa_rules, by = 'support')[1:15])
 inspect(sort(associa_rules, by = 'confidence')[1:15])
 inspect(sort(associa_rules, by = 'lift')[1:15])
+
+left_sp_rules <- apriori(data = dataset, 
+                         parameter = list(supp=.001, conf=.01, minlen=2, maxlen = 5),
+        appearance = list(default="rhs", lhs="B01GCKO9IK"),
+        control=list(verbose=FALSE))
+left_sp_rules <- sort(left_sp_rules, decreasing=TRUE, by="lift")
+inspect(left_sp_rules[1:15])
 
 associa_rules
 

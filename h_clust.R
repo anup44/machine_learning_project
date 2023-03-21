@@ -13,6 +13,31 @@ suppressPackageStartupMessages(library(dplyr))
 reviews <- read_csv('tokens_vectorized.csv')
 reviews = reviews[-1]
 head(reviews)
+
+points = read_csv("trans_points.csv")[-1]
+rat_cat = read_csv('rating_category.csv')[-1]
+colnames(rat_cat)[1] = 'review_rating'
+
+id1 = sample(which(rat_cat$category_1 == "Computers & Accessories"), 15)
+id2 = sample(which(rat_cat$category_1 == "Camera & Photo"), 15)
+id3 = sample(which(rat_cat$category_1 == "Accessories & Supplies"), 15)
+id4 = sample(which(rat_cat$category_1 == "Headphones"), 15)
+
+sample_ids = c(id1, id2, id3, id4)
+
+# sample_ids = sample(nrow(reviews), 50)
+reviews = reviews[sample_ids, ]
+reviews = reviews[, -which(apply(reviews, 2, sum)==0)]
+
+points = points[sample_ids, ]
+rat_cat = rat_cat[sample_ids,]
+
+dim(points)
+dim(rat_cat)
+colnames(rat_cat)[1] = 'review_rating'
+
+
+
 # summary(reviews)
 scaled = scale(t(reviews))
 scaled[is.na(scaled)] = 0
@@ -30,7 +55,7 @@ hcd <- as.dendrogram(hclust_avg)
 cut_avg <- cutree(hclust_avg, k = 10)
 
 avg_col_dend <- color_labels(color_branches(hcd, k = 10), k = 10)
-avg_col_dend <- assign_values_to_leaves_nodePar(avg_col_dend, 0.2, "lab.cex")
+avg_col_dend <- assign_values_to_leaves_nodePar(avg_col_dend, 0.6, "lab.cex")
 
 nodePar <- list(lab.cex = 0.1,
                 cex = 0.07)
@@ -59,18 +84,22 @@ plot(hcd, ylab = "Height", nodePar = nodePar, leaflab = "none")
 colors = c("black", "red", "blue", "green", "orange", "purple", "lightblue", "pink", "gray", "brown")
 clus4 = cutree(hclust_avg, 10)
 plot(as.phylo(hclust_avg), type = "fan", tip.color = colors[clus4],
-     label.offset = 1, cex = 0.2)
+     label.offset = 1, cex = 0.5)
 
 
 
 rect.hclust(hclust_avg , k = 10, border = 2:6)
 abline(h = 10, col = 'red')
 
-points = read_csv("trans_points.csv")[-1]
-rat_cat = read_csv('rating_category.csv')[-1]
-dim(points)
-dim(rat_cat)
-colnames(rat_cat)[1] = 'review_rating'
+# points = read_csv("trans_points.csv")[-1]
+# rat_cat = read_csv('rating_category.csv')[-1]
+
+# points = points[sample_ids, ]
+# rat_cat = rat_cat[sample_ids,]
+
+# dim(points)
+# dim(rat_cat)
+# colnames(rat_cat)[1] = 'review_rating'
 
 reviews_cl1 = bind_cols(reviews_cl, points)
 reviews_cl1 = bind_cols(reviews_cl1, rat_cat)
@@ -86,18 +115,24 @@ ggplot(reviews_cl1, aes(x = factor(category_1), y = factor(cluster))) + geom_bin
   scale_x_discrete(guide = guide_axis(angle = 90))
 
 
-hclust_ward <- hclust(cos_dist, method = 'ward.D')
+hclust_ward <- hclust(cos_dist, method = 'complete')
 hcd_ward <- as.dendrogram(hclust_ward)
-cut_ward <- cutree(hclust_ward, k = 10)
+cut_ward <- cutree(hclust_ward, k = 4)
 
-ward_col_dend <- color_labels(color_branches(hcd_ward, k = 10), k = 10)
-ward_col_dend <- assign_values_to_leaves_nodePar(ward_col_dend, 0.2, "lab.cex")
+ward_col_dend <- color_labels(color_branches(hcd_ward, k = 4), k = 4)
+ward_col_dend <- assign_values_to_leaves_nodePar(ward_col_dend, 0.6, "lab.cex")
+# ward_col_dend <- assign_values_to_leaves_nodePar(ward_col_dend, rat_cat$category_1, "lab")
+ward_col_dend = set(ward_col_dend, 'labels', paste(rat_cat$category_1, labels(ward_col_dend)))
 
 nodePar <- list(lab.cex = 0.1,
-                cex = 0.07)
+               cex = 0.07)
 plot(ward_col_dend, 
-     main="Dendogram for hclust using 'ward.D' method for 10 colored clusters", 
+     main="Dendogram for hclust using 'complete' method for 4 colored clusters", 
      nodePar=nodePar)
+
+plot(ward_col_dend, cex=0.6, hang=-1, main = "Minkowski p=2 (Euclidean)")
+rect.hclust(hclust_ward , k = 8, border = 2:6)
+abline(h = 8, col = 'red')
 
 reviews_cl <- mutate(reviews, cluster = cut_ward)
 count(reviews_cl, cluster)
@@ -192,3 +227,28 @@ ggplot(reviews_cl1, aes(x = factor(review_rating), y = factor(cluster))) + geom_
 
 ggplot(reviews_cl1, aes(x = factor(category_1), y = factor(cluster))) + geom_bin_2d() + 
   scale_x_discrete(guide = guide_axis(angle = 90))
+
+library(NbClust)
+library(cluster)
+library(mclust)
+library(factoextra)
+
+fviz_nbclust(reviews, method = "silhouette", 
+             FUN = hcut, k.max = 12)
+
+cols = sample(ncol(reviews), 7)
+
+kmeans_1_Result <- kmeans(reviews[, cols], 4, nstart=25)   
+print(kmeans_1_Result)
+
+table(rat_cat$category_1, kmeans_1_Result$cluster)
+
+summary(kmeans_1_Result)
+
+# reviews = reviews[, -which(apply(reviews, 2, sum)==0)]
+
+fviz_cluster(kmeans_1_Result, reviews, main="Euclidean")
+
+library(e1071)
+kmeans_1_Result <- naiveBayes(reviews[, cols], rat_cat$category_1)   
+print (kmeans_1_Result)
