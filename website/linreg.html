@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>ML Project - Linear Regression</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/cu.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+  <link href="assets/css/prism.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Impact - v1.2.0
+  * Template URL: https://bootstrapmade.com/impact-bootstrap-business-website-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <section id="topbar" class="topbar d-flex align-items-center">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+      <div class="contact-info d-flex align-items-center">
+        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">Anup.Bhutada@colorado.edu</a></i>
+        <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 720 312 8601</span></i>
+      </div>
+      <div class="social-links d-none d-md-flex align-items-center">
+        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+      </div>
+    </div>
+  </section><!-- End Top Bar -->
+
+  <header id="header" class="header d-flex align-items-center">
+
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1>CSCI 5622 Machine Learning<span>.</span></h1>
+      </a>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#about">Introduction</a></li>
+          <li><a href="index.html#navigation">Sections</a></li>
+          <li><a href="#portfolio">Conclusion</a></li>
+          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="dataprep.html">Data Prep & EDA</a></li>
+              <li><a href="clustering.html">Clustering</a></li>
+              <!-- <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                <ul>
+                  <li><a href="#">Deep Drop Down 1</a></li>
+                  <li><a href="#">Deep Drop Down 2</a></li>
+                  <li><a href="#">Deep Drop Down 3</a></li>
+                  <li><a href="#">Deep Drop Down 4</a></li>
+                  <li><a href="#">Deep Drop Down 5</a></li>
+                </ul>
+              </li> -->
+              <li><a href="arm.html">ARM</a></li>
+              <li><a href="naivebayes.html">Naive Bayes</a></li>
+              <li><a href="decisiontree.html">Decision Trees</a></li>
+              <li><a href="svm.html">SVM</a></li>
+              <li><a href="neuralnets.html">Neural Networks</a></li>
+              <li><a href="#">Linear Regression</a></li>
+            </ul>
+          </li>
+          <!-- <li><a href="#contact">Contact</a></li> -->
+        </ul>
+      </nav><!-- .navbar -->
+
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+
+    </div>
+  </header><!-- End Header -->
+  <!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+      <div class="page-header d-flex align-items-center" style="background-image: url('');">
+        <div class="container position-relative">
+          <div class="row d-flex justify-content-center">
+            <div class="col-lg-6 text-center">
+              <h2>Linear Regression</h2>
+              <!-- <p>Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav>
+        <div class="container">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li>Linear Regression</li>
+          </ol>
+        </div>
+      </nav>
+    </div><!-- End Breadcrumbs -->
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="container" data-aos="fade-up">
+        <div class="row justify-content-between gy-4 mt-4">
+          <div class="col-lg-10">
+            <div class="portfolio-description">
+              <h2>Overview</h2>
+
+
+              <p>
+                Linear regression is a widely used statistical method for modeling the relationship between a dependent variable and one or more independent variables. One of the main advantages of linear regression is its simplicity and ease of implementation. It allows for easy interpretation of the relationship between the predictors and the response variable and provides estimates of the magnitude and direction of the effect of each predictor on the response variable. This makes it a useful tool in various fields, including finance, economics, and social sciences.
+              </p>
+
+              <p>
+                However, linear regression also has some limitations and assumptions that need to be considered when interpreting the results. One of the key assumptions of linear regression is that the relationship between the predictors and the response variable is linear. If the relationship is nonlinear, then linear regression may not be appropriate. Additionally, linear regression assumes that the residuals (the difference between the predicted values and the actual values) are normally distributed and have equal variances. Violations of these assumptions can lead to biased estimates and inaccurate predictions.
+              </p>
+              <p>
+                Another potential disadvantage of linear regression is the risk of overfitting the model to the data. If too many predictors are included in the model relative to the sample size, the model may fit the noise in the data rather than the underlying relationship. This can lead to poor out-of-sample predictions and decreased generalizability of the model. Therefore, it is important to balance the number of predictors included in the model with the sample size and to use techniques such as cross-validation to evaluate the model's performance.
+              </p>
+
+              <h2>Data Prep and Code</h2>
+
+              <p>
+                The data was initially cleaned and prepared in <a href="dataprep.html">Data Prep</a> and <a href="clustering.html#:~:text=Part%201%20%2D%20Numerical%20Data">Part 1 of Clustering</a> parts. The data used in this part is the numerical data with the following columns: <code>price, found_helpful and rating</code>. Data was filtered to include only these columns after the cleaning described in the above mentioned sections.
+              </p>
+
+              <p>  
+                Neural Networks are a supervised learning method because to train NNs we require labelled data points to evalauate the cost and backpropagate the gradients. The data that was prepared in the sections menrioned above already has labels in the form of categories of products and user rating. We will use this to train and test the NN classifier and observe how well it is able to use product reviews to identify product categories and user ratings.
+              </p>
+
+              <p>Shown below is a sample of the dataset used for this part.</p>
+
+              <img class="img-fluid rounded-4 mb-4" src="assets/img/lr_sample_data.png">
+
+              <p>
+                The independent varaibles here are <code>price</code> and <code>founs_helpful</code> and the dependent vaiable (response) is <code>rating</code>.
+              </p>
+
+              <!-- <figcaption class="figure-caption">A caption for the above image.</figcaption>
+
+              <figcaption class="figure-caption">A caption for the above image.</figcaption> -->
+
+              <p>Link to sample data file and code:</p>
+
+              <ul>
+                <li>Data file: <a href="https://github.com/anup44/machine_learning_project/blob/main/lr_num_data_sample.csv" target="_blank">https://github.com/anup44/machine_learning_project/blob/main/lr_num_data_sample.csv</a></li>
+                <li>Neural Networks Code: <a href="https://github.com/anup44/machine_learning_project/blob/main/linear_regression.ipynb" target="_blank">https://github.com/anup44/machine_learning_project/blob/main/linear_regression.ipynb</a></li>
+              </ul>
+
+              <h2>Code</h2>
+
+              <pre><code class="language-python line-numbers">import numpy as np
+import pandas as pd
+import statsmodels.api as sm
+import seaborn as sns
+
+meta_df_1000 = pd.read_parquet('meta_df_1000_cleaned.parquet')
+reviews_df = pd.read_parquet('reviews_df_clean.parquet')
+
+merged_df = pd.merge(meta_df_1000, reviews_df, on='asin', how='inner')
+merged_df['category_1'] = merged_df.category.apply(lambda x: x[1])
+merged_df['rating'] = merged_df['rating'].astype(float)
+merged_df.head()
+
+merged_df_lr = merged_df[['price', 'found_helpful', 'rating']].dropna()
+print (merged_df_lr.shape)
+merged_df_lr.sample(10)
+
+lr_x = sm.add_constant(merged_df_lr[['price', 'found_helpful']])
+lr_x
+
+mod = sm.OLS(merged_df_lr['rating'], lr_x)
+res = mod.fit()
+print (res.summary())
+
+sns.boxplot(x = 'rating', y='price', data=merged_df_lr)</code></pre>
+
+              <h2>Results</h2>
+              
+              <p>
+                The columns <code>price</code> and <code>found_helpful</code> were used as predictors to check if they could explain the variance in rating. A constant was added to accomodate for the intercept term in the linear regression model. The code shown below adds this contant term and runs a linear regression model using the statsmodels library.
+              </p>
+
+              <pre><code class="language-python line-numbers">lr_x = sm.add_constant(merged_df_lr[['price', 'found_helpful']])
+lr_x
+mod = sm.OLS(merged_df_lr['rating'], lr_x)
+res = mod.fit()
+print (res.summary())</code></pre>
+
+              <p>The resulting summary is shown below.</p>
+
+              <pre><code class="language-css">                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                 rating   R-squared:                       0.000
+Model:                            OLS   Adj. R-squared:                 -0.000
+Method:                 Least Squares   F-statistic:                    0.3606
+Date:                Mon, 01 May 2023   Prob (F-statistic):              0.697
+Time:                        15:26:01   Log-Likelihood:                -4898.4
+No. Observations:                3066   AIC:                             9803.
+Df Residuals:                    3063   BIC:                             9821.
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+=================================================================================
+                    coef    std err          t      P>|t|      [0.025      0.975]
+---------------------------------------------------------------------------------
+const             4.1184      0.024    171.355      0.000       4.071       4.166
+price             0.0004      0.000      0.762      0.446      -0.001       0.001
+found_helpful    -0.0005      0.001     -0.401      0.688      -0.003       0.002
+==============================================================================
+Omnibus:                      636.890   Durbin-Watson:                   1.735
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             1098.642
+Skew:                          -1.387   Prob(JB):                    2.71e-239
+Kurtosis:                       3.954   Cond. No.                         56.0
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</code></pre>
+
+              <p>
+                The results printed in the summary show high p-values for both predictors and a vary bad R-squared value. This implies that none of the selected predictors are able to explain the variance in the response variable and as a result this model is bad in predicting the rating.
+              </p>
+
+              <p>
+                A box plot of price for different rating values is shown below.
+              </p>
+              
+              <img class="img-fluid rounded-4 mb-4" src="assets/img/lr_price_rating_plot.png">
+
+              <p>
+                This plot shows that the distribution of price across all ratings is more or less same disregarding the outliers. This aligns with the results of the regression model that say that price does not explain the variability in rating.
+              </p>
+
+              <h2>Conclusion</h2>
+
+              <p>
+                In this section, a linear regression model was implemented in python and was employed to study the relationship between the predictors (price and found_helpful) and the response (rating).
+              </p>
+
+              <p>
+                Based on the results that we observed, it can be concluded that linear regression may not always be a suitable method to model the relationship between predictors and response variables. In this specific case, the model built using the price and found_helpful predictors was not able to explain the variance in the rating response variable, as indicated by the low R-squared value and high p-values for both predictors.
+              </p>
+              <p>
+                Furthermore, the box plot of price for different rating values also suggests that price may not be a significant factor in determining the rating. Therefore, it is important to carefully select appropriate predictors and assess their significance before using linear regression as a modeling technique.
+              </p>
+
+              <p>
+                In summary, while linear regression can be a useful statistical tool for modeling the relationship between predictors and response variables, it is important to consider its limitations and assumptions. This includes checking for linearity of the relationship, normality and equal variances of the residuals, and potential overfitting of the model.
+              </p>
+
+              <p>
+                Despite these limitations, linear regression can be very useful in many cases. For example, it can be used to predict sales based on advertising expenditure, to model the effect of temperature on crop yield, or to analyze the relationship between education and income. Linear regression can also be extended to include interaction terms and polynomial terms to model more complex relationships between predictors and response variables.
+              </p>
+
+              <p>
+                Overall, the selection and interpretation of predictors should be done with care, and other modeling techniques, such as non-linear regression or machine learning algorithms, should be considered when linear regression assumptions are not met. When used appropriately, linear regression can provide valuable insights into the relationship between variables and help to inform decision-making in a variety of fields.
+              </p>
+
+            </div>
+
+
+            <div>
+              
+            </div>
+
+              
+
+          <!-- <div class="col-lg-3">
+            <div class="portfolio-info">
+              <h3>Project information</h3>
+              <ul>
+                <li><strong>Category</strong> <span>Web design</span></li>
+                <li><strong>Client</strong> <span>ASU Company</span></li>
+                <li><strong>Project date</strong> <span>01 March, 2020</span></li>
+                <li><strong>Project URL</strong> <a href="#">www.example.com</a></li>
+                <li><a href="#" class="btn-visit align-self-start">Visit Website</a></li>
+              </ul>
+            </div>
+          </div> -->
+
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Details Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+
+    <div class="container">
+      <div class="row gy-4">
+
+        <div class="col-lg-10 col-12 footer-links">
+          <h4>Useful Links</h4>
+          <ul>
+            <li><a href="https://github.com/anup44/machine_learning_project" target="_blank"><strong>All code files:</strong> https://github.com/anup44/machine_learning_project</a></li>
+            <li><a href="https://jmcauley.ucsd.edu/data/amazon_v2/metaFiles2/meta_Electronics.json.gz" target="_blank"><strong>Amazon products metadata for Electrinics category:</strong> https://jmcauley.ucsd.edu/data/amazon_v2/metaFiles2/meta_Electronics.json.gz</a></li>
+            <li><a href="https://github.com/anup44/machine_learning_project/blob/main/product_reviews_1000.json" target="_blank"><strong>Scraped Product reviews data:</strong> https://github.com/anup44/machine_learning_project/blob/main/product_reviews_1000.json</a></li>
+            <li><a href="https://github.com/anup44/machine_learning_project/blob/main/lr_num_data_sample.csv" target="_blank"><strong>Numerical Data used for linear regression:</strong> https://github.com/anup44/machine_learning_project/blob/main/lr_num_data_sample.csv</a></li>
+            <li><a href="https://github.com/anup44/machine_learning_project/blob/main/linear_regression.ipynb" target="_blank"><strong>Code for Linear Regression:</strong> https://github.com/anup44/machine_learning_project/blob/main/linear_regression.ipynb</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+  </footer><!-- End Footer -->
+  <!-- End Footer -->
+
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/prism.js"></script>
+
+</body>
+
+</html>

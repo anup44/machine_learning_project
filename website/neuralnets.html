@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>ML Project - Neural Networks</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/cu.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+  <link href="assets/css/prism.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Impact - v1.2.0
+  * Template URL: https://bootstrapmade.com/impact-bootstrap-business-website-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <section id="topbar" class="topbar d-flex align-items-center">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+      <div class="contact-info d-flex align-items-center">
+        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">Anup.Bhutada@colorado.edu</a></i>
+        <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 720 312 8601</span></i>
+      </div>
+      <div class="social-links d-none d-md-flex align-items-center">
+        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+      </div>
+    </div>
+  </section><!-- End Top Bar -->
+
+  <header id="header" class="header d-flex align-items-center">
+
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1>CSCI 5622 Machine Learning<span>.</span></h1>
+      </a>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#about">Introduction</a></li>
+          <li><a href="index.html#navigation">Sections</a></li>
+          <li><a href="#portfolio">Conclusion</a></li>
+          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="dataprep.html">Data Prep & EDA</a></li>
+              <li><a href="clustering.html">Clustering</a></li>
+              <!-- <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                <ul>
+                  <li><a href="#">Deep Drop Down 1</a></li>
+                  <li><a href="#">Deep Drop Down 2</a></li>
+                  <li><a href="#">Deep Drop Down 3</a></li>
+                  <li><a href="#">Deep Drop Down 4</a></li>
+                  <li><a href="#">Deep Drop Down 5</a></li>
+                </ul>
+              </li> -->
+              <li><a href="arm.html">ARM</a></li>
+              <li><a href="naivebayes.html">Naive Bayes</a></li>
+              <li><a href="decisiontree.html">Decision Trees</a></li>
+              <li><a href="svm.html">SVM</a></li>
+              <li><a href="#">Neural Networks</a></li>
+            </ul>
+          </li>
+          <!-- <li><a href="#contact">Contact</a></li> -->
+        </ul>
+      </nav><!-- .navbar -->
+
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+
+    </div>
+  </header><!-- End Header -->
+  <!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+      <div class="page-header d-flex align-items-center" style="background-image: url('');">
+        <div class="container position-relative">
+          <div class="row d-flex justify-content-center">
+            <div class="col-lg-6 text-center">
+              <h2>Neural Networks</h2>
+              <!-- <p>Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav>
+        <div class="container">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li>Neural Networks</li>
+          </ol>
+        </div>
+      </nav>
+    </div><!-- End Breadcrumbs -->
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="container" data-aos="fade-up">
+        <div class="row justify-content-between gy-4 mt-4">
+          <div class="col-lg-10">
+            <div class="portfolio-description">
+              <h2>Overview</h2>
+
+
+              <p>
+                Neural networks are a type of computing model that is designed to recognize patterns, similar to the way the human brain works. They are composed of interconnected processing elements called neurons that work together to produce an output function. The structure of a neural network typically consists of input and output layers, and a hidden layer that performs transformations on the input before it is processed by the output layer. Neural networks are able to interpret various types of data, such as images, sound, text, and time series, by translating them into numerical vectors. They are a powerful tool for clustering and classification, grouping unlabeled data according to similarities and classifying labeled data using a training dataset. In addition, deep neural networks can extract features that are used by other algorithms for clustering and classification.
+              </p>
+
+              <figure class="d-block text-center">
+                <div class="row">
+                  <img src="assets/img/nn_fully_connected.png" class="col-4 figure-img img-fluid rounded-4 mb-4 mx-auto d-block" alt="A generic square placeholder image with rounded corners in a figure.">
+                </div>
+                <figcaption class="blockquote-footer">
+                  Image from <cite title="Source URL">https://www.kdnuggets.com/2019/11/designing-neural-networks.html</cite>
+                </figcaption>
+              </figure>
+
+              <h2>Data Prep and Code</h2>
+
+              <p>
+                The data was initially cleaned and prepared in <a href="dataprep.html">Data Prep</a> and <a href="clustering.html#:~:text=Text%20Data%20(TFIDF)-,Data%20Preparation%20and%20code,-Here%20we%20do">Clustering</a> parts. The data used in this part is the TFIDF vectorized review text with product category (part 1) and user rating (part 2) as labels. The TFIDF features are not standardized for using with Neural Netwroks (NNs) in this part. The reason to this was explained in the SVM section and is linked <a href="svm.html#:~:text=using%20unscaled%20data%20improved%20the%20performance" target="_blank">here</a>. The dataset is also filtered for removing highly improbable classes and classes with high overlaps.
+              </p>
+
+              <p>  
+                Neural Networks are a supervised learning method because to train NNs we require labelled data points to evalauate the cost and backpropagate the gradients. The data that was prepared in the sections menrioned above already has labels in the form of categories of products and user rating. We will use this to train and test the NN classifier and observe how well it is able to use product reviews to identify product categories and user ratings.
+              </p>
+
+              <p>Shown below is a sample of the dataset used for this part.</p>
+
+              <img class="img-fluid rounded-4 mb-4" src="assets/img/svm_data_sample.png">
+
+              <p>
+                Since supervised learning methods need to work well on unseen data, that is, the data that was not used for training, this dataset needs to be split into training and testing set. The training set will be used for building the NN and the testing set will be used to check if the model is able to predict well on unseen data. This way of measuring the performance of model is required to ensure that our model does not overfit on our data and is able to generalize on new data that might be required to predict on. Since collected data is not a perfect representation of population in most cases, machine learning models generally work better on the data that is used for training and have a slightly, or significantly, worse performance when new data is used for predictions. To account for this bias in the model performance, to some extent, we need to ensure that our training and testing set are disjoint so that we can simulate how the model might perform when it is deployed or used for making predictions.
+              </p>
+
+              <p>
+                The labels for both the parts (predicting product categories and user ratings) were creating by generating one-hot encodings for the columns <code>category_1</code> and <code>rating</code>. Since the NN was coded by hand for this part, this explicit transformation of labels was required to work with the code.
+              </p>
+
+              <p>
+                To create training and testing set, the function <code>train_test_split</code> from the sklearn package was used with <code>test_size = 0.2</code>. Below are two images, showing a sample of the data that was split into training and testing sets.
+              </p>
+
+              <figure class="d-block text-center">
+                <img src="assets/img/svm_train_sample.png" class="figure-img img-fluid rounded mx-auto d-block" alt="A generic square placeholder image with rounded corners in a figure.">
+                <figcaption class="figure-caption">Training Set sample</figcaption>
+              </figure>
+
+              <figure class="d-block text-center">
+                <img src="assets/img/svm_test_sample.png" class="figure-img img-fluid rounded" alt="A generic square placeholder image with rounded corners in a figure.">
+                <figcaption class="figure-caption">Testing Set sample</figcaption>
+              </figure>
+
+              <figure class="d-block text-center">
+                <img src="assets/img/nn_user_rating_sample.png" class="figure-img img-fluid rounded" alt="A generic square placeholder image with rounded corners in a figure.">
+                <figcaption class="figure-caption">Sample of Labels for user ratings</figcaption>
+              </figure>
+
+              
+
+              <!-- <figcaption class="figure-caption">A caption for the above image.</figcaption>
+
+              <figcaption class="figure-caption">A caption for the above image.</figcaption> -->
+
+              <p>Link to sample data file and code:</p>
+
+              <ul>
+                <li>Data file: <a href="https://github.com/anup44/machine_learning_project/blob/main/tokens_tfidf_vectorized_sample.csv" target="_blank">https://github.com/anup44/machine_learning_project/blob/main/tokens_tfidf_vectorized_sample.csv</a></li>
+                <li>Neural Networks Code: <a href="https://github.com/anup44/machine_learning_project/blob/main/neural_nets.ipynb" target="_blank">https://github.com/anup44/machine_learning_project/blob/main/neural_nets.ipynb</a></li>
+              </ul>
+
+              <h2>Code</h2>
+
+              <pre><code class="language-python line-numbers">import numpy as np
+import pandas as pd
+import spacy
+import tqdm
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from sklearn.model_selection import train_test_split
+
+class Dense(object):
+    def __init__(self, out_dim, inp_dim=None, reg=0.001):
+        self.W = None
+        self.b = np.random.normal(0, 0.2, out_dim)
+        self.reg = reg
+        self.out_dim = out_dim
+        self.inp_dim = inp_dim
+        self.inp = None
+        self.next = None
+        self.momment1 = None
+        self.momment2 = None
+        self.momment_b1 = np.zeros_like(self.b)
+        self.momment_b2 = np.zeros_like(self.b)
+        if inp_dim:
+            self.W = np.random.normal(0, 1, (self.out_dim, self.inp_dim))
+            self.momment1 = np.zeros_like(self.W)
+            self.momment2 = np.zeros_like(self.W)
+
+    def __call__(self, inp=None):
+        self.inp = inp
+        inp.next = self
+        self.inp_dim = inp.out_dim
+        self.W = np.random.normal(0, 1, (self.out_dim, self.inp_dim))
+        self.momment1 = np.zeros_like(self.W)
+        self.momment2 = np.zeros_like(self.W)
+        return self
+    
+    def __repr__(self):
+        return (self.__class__.__name__ + ' output: ' + str(self.out_dim) + ' input: ' + str(self.inp_dim))
+
+    def forward(self, X, y=None, W=None, b=None):
+        self.X = X
+        if not W:
+            W = self.W
+        if not b:
+            b = self.b
+        out = np.dot(W, X.T).T + b
+        return out # logits
+    
+    def backward(self, dO):
+        dW = np.sum(self.X[:, np.newaxis, :] * dO[:, :, np.newaxis], axis=0) + self.reg*self.W
+        dX = np.sum(self.W[:, :, np.newaxis] * dO.T[:, np.newaxis, :], axis=0).T
+        db = np.sum(dO, axis=0)
+        return (dX, dW, db)
+    
+class Activation(object):
+    def __init__(self, func='relu'): # options: relu, softmax_with_cat_cross_entropy (softmax)
+        self.act_function = func
+        self.next = None
+
+    def __call__(self, inp=None):
+        self.inp = inp
+        inp.next = self
+        self.inp_dim = inp.out_dim
+        self.out_dim = self.inp_dim
+        return self
+    
+    def __repr__(self):
+        return (self.__class__.__name__ + ' ' + self.act_function + ' output: ' + str(self.out_dim) + ' input: ' + str(self.inp_dim))
+    
+    def forward(self, X, y=None):
+        self.X = X
+        self.y = y
+        if self.act_function == 'relu':
+            out = np.maximum(0, X)
+            activations = out
+        elif self.act_function == 'softmax':
+            exps = np.exp(X - np.max(X, axis=1, keepdims=True))
+            activations = exps / np.sum(exps, axis=1, keepdims=True)
+            activations = np.where(activations > 1.0e-10, activations, 1.0e-10)
+            out = np.mean(-1*np.sum(y * np.log(activations), axis=1))
+        self.activations = activations
+        return out
+    
+    def predict(self, X, y=None):
+        _ = self.forward(X, y)
+        return self.activations
+    
+    def backward(self, dO=None):
+        if self.act_function == 'relu':
+            dX = np.where(self.X < 0, 0, 1) * dO
+        elif self.act_function == 'softmax':
+            dX = self.activations - self.y
+        return (dX, None, None)
+           
+class Optimizer(object): # Adam implementation
+    def __init__(self, lr=0.001, b1=0.9, b2=0.999):
+        self.b1, self.b2 = b1, b2
+        self.eps = 1e-8
+        self.t = 1
+        self.lr = lr
+        self.loss = []
+
+    def run_forward(self, input_layer, X, y):
+        layer = input_layer
+        out = X
+        while (layer):
+            # print (layer)
+            # print (out.shape)
+            out = layer.forward(out, y)
+            layer = layer.next
+        loss = out
+        return loss
+
+    def optimize_step(self, out_layer):
+        layer = out_layer 
+        t = self.t
+        dO = 1  
+        lr = self.lr 
+        while (layer):
+            # print (layer)
+            dO, dW, db = layer.backward(dO)
+            if dW is not None:
+                moment1 = (self.b1 * layer.momment1) + ((1 - self.b1) * dW)
+                moment2 = (self.b2 * layer.momment2) + ((1 - self.b2) * dW**2)
+                mt1_hat = moment1/(1 - self.b1**t)
+                mt2_hat = moment2/(1 - self.b2**t)
+                W = layer.W - (lr * mt1_hat/(np.sqrt(mt2_hat) + self.eps))
+                layer.W = W
+                layer.moment1 = moment1
+                layer.moment2 = moment2
+
+                moment_b1 = (self.b1 * layer.momment_b1) + ((1 - self.b1) * db)
+                moment_b2 = (self.b2 * layer.momment_b2) + ((1 - self.b2) * db**2)
+                mt1_hat = moment_b1/(1 - self.b1**t)
+                mt2_hat = moment_b2/(1 - self.b2**t)
+                b = layer.b - (lr * mt1_hat/(np.sqrt(mt2_hat) + self.eps))
+                layer.b = b
+                layer.momment_b1 = moment_b1
+                layer.momment_b2 = moment_b2
+
+            self.t = t + 1
+            layer = layer.inp
+        return self.t
+
+    # def train(self, input_layer, out_layer, X, y, batch_size=None):
+    #     patience = 20
+    #     loss_tracker = []
+    #     patience_remaining = patience
+    #     while (patience_remaining > 0):
+    #         loss = self.run_forward(input_layer, X, y)
+    #         timestep = self.optimize_step(out_layer)
+    #         if len(loss_tracker) > 0 and loss > min(loss_tracker):
+    #             patience_remaining -= 1
+    #         else:
+    #             patience_remaining = patience
+    #         loss_tracker.append(loss)
+
+    #         print ('iteration:', timestep, 'loss:', loss)
+
+    def train(self, input_layer, out_layer, X, y, batch_size=None, verbose=False):
+        patience = 20
+        loss_tracker = []
+        patience_remaining = patience
+        epoch = 0
+        if not isinstance(batch_size, int):
+            batch_size = X.shape[0]
+        print ("Using batch_size of", batch_size)
+        while (patience_remaining > 0):
+            loss_tracker_epoch = []
+            for i in tqdm.tqdm(range(int(np.ceil(X.shape[0]/batch_size))), disable=not verbose):
+                up_ind = min(X.shape[0], (i + 1) * batch_size)
+                X_batch = X[i * batch_size: up_ind]
+                y_batch = y[i * batch_size: up_ind]
+                loss = self.run_forward(input_layer, X_batch, y_batch)
+                timestep = self.optimize_step(out_layer)
+                loss_tracker_epoch.append(loss)
+            epoch_loss = np.mean(loss_tracker_epoch)
+            epoch += 1
+            
+            if len(loss_tracker) > 0 and epoch_loss > min(loss_tracker):
+                patience_remaining -= 1
+            else:
+                patience_remaining = patience
+            loss_tracker.append(epoch_loss)
+
+            print ('epoch:', epoch, 'loss:', epoch_loss)
+    
+    def predict(self, input_layer, X, y, batch_size=None):
+        out_list = []
+        if not isinstance(batch_size, int):
+            batch_size = X.shape[0]
+        print ("Using batch_size of", batch_size)
+        for i in range(int(np.ceil(X.shape[0]/batch_size))):
+            up_ind = min(X.shape[0], (i + 1) * batch_size)
+            X_batch = X[i * batch_size: up_ind]
+            y_batch = y[i * batch_size: up_ind]
+            layer = input_layer
+            out = X_batch
+            while (layer):
+                # print (layer)
+                # print (out.shape)
+                if isinstance(layer, Activation):
+                # if isinstance(layer, relu1.__class__):
+                    out = layer.predict(out, y_batch)
+                else:
+                    out = layer.forward(out, y_batch)
+                layer = layer.next
+            out_list.append(out)
+        return np.vstack(out_list)
+
+
+meta_df_1000 = pd.read_parquet('meta_df_1000_cleaned.parquet')
+reviews_df = pd.read_parquet('reviews_df_clean.parquet')
+
+merged_df = pd.merge(meta_df_1000, reviews_df, on='asin', how='inner')
+merged_df['category_1'] = merged_df.category.apply(lambda x: x[1])
+merged_df['rating'] = merged_df['rating'].astype(float)
+merged_df.head()
+
+merged_df.info()
+
+merged_df = merged_df[merged_df['category_1']\
+                    .isin(['Computers & Accessories', 'Camera & Photo', 
+                           'Accessories & Supplies', 'Headphones', 'Car & Vehicle Electronics'])]
+
+nlp = spacy.load('en_core_web_sm')
+merged_df['tokens'] = merged_df['content'].apply(lambda x: nlp(x.lower())) 
+merged_df.tokens
+
+merged_df['tokens'] = merged_df.tokens.apply(lambda x: [w.lemma_ for w in x if not w.is_stop and not w.is_punct and w.lemma_!=' '])
+
+merged_df['tokens'] = merged_df['tokens'].apply(lambda x: ' '.join(x))
+merged_df['tokens'].head(10)
+
+vectorizer = TfidfVectorizer(max_df=0.7)
+tokens_vectorized = vectorizer.fit_transform(merged_df['tokens'])
+tokens_vectorized
+
+tokens_vectorized.shape
+
+## PART 1
+
+X_train, X_test, y_train, y_test = train_test_split(tokens_vectorized, merged_df['category_1'], test_size=0.2)
+y_train = pd.get_dummies(y_train).to_numpy()
+y_test = pd.get_dummies(y_test).to_numpy()
+
+X_train.shape, X_test.shape, y_train.shape, y_test.shape
+
+input_layer = Dense(128, inp_dim=12814)
+relu1 = Activation(func='relu')(input_layer)
+hidden1 = Dense(16)(relu1)
+relu2 = Activation(func='relu')(hidden1)
+hidden2 = Dense(5)(relu2)
+out_layer = Activation(func='softmax')(hidden2)
+
+optim = Optimizer()
+optim.train(input_layer, out_layer, X_train.toarray(), y_train, batch_size=32)
+
+batch_size = 64
+X = X_test
+y = y_test
+out_list = []
+if not isinstance(batch_size, int):
+    batch_size = X.shape[0]
+print ("Using batch_size of", batch_size)
+for i in range(int(np.ceil(X.shape[0]/batch_size))):
+    up_ind = min(X.shape[0], (i + 1) * batch_size)
+    X_batch = X[i * batch_size: up_ind]
+    y_batch = y[i * batch_size: up_ind]
+    out = hidden2.forward(relu2.forward(hidden1.forward(relu1.forward(input_layer.forward(X_batch.toarray(), y_batch)))))
+    out_list.append(out)
+
+y_preds = np.argmax(np.vstack(out_list),axis=1)
+y_preds.shape
+
+from sklearn.metrics import accuracy_score, confusion_matrix, ConfusionMatrixDisplay, classification_report
+accuracy_score(np.argmax(y_test, axis=1), y_preds)
+
+ConfusionMatrixDisplay(confusion_matrix(np.argmax(y_test, axis=1), y_preds)).plot()
+
+print (classification_report(np.argmax(y_test, axis=1), y_preds))
+
+## PART 2
+
+pd.value_counts(merged_df.rating)
+
+merged_df['rating_cat'] = np.where(merged_df['rating']==5, 'high', np.where(merged_df['rating']==4, 'moderate', 'low'))
+merged_df['rating_cat']
+
+merged_df[merged_df.rating == 5.0]['rating_cat'].value_counts()
+
+y = pd.get_dummies(merged_df['rating_cat']).reindex(columns=['high', 'moderate', 'low']).to_numpy()
+
+X_train, X_test, y_train, y_test = train_test_split(tokens_vectorized, y, test_size=0.2)
+X_train.shape, X_test.shape, y_train.shape, y_test.shape
+
+input_layer = Dense(128, inp_dim=12814)
+relu1 = Activation(func='relu')(input_layer)
+hidden1 = Dense(16)(relu1)
+relu2 = Activation(func='relu')(hidden1)
+hidden2 = Dense(3)(relu2)
+out_layer = Activation(func='softmax')(hidden2)
+
+optim = Optimizer()
+optim.train(input_layer, out_layer, X_train.toarray(), y_train, batch_size=32)
+
+optim = Optimizer(lr=0.0004)
+optim.train(input_layer, out_layer, X_train.toarray(), y_train, batch_size=32)
+
+# Train performance
+y_preds = optim.predict(input_layer, X_train.toarray(), y_train, batch_size=32)
+print (y_preds.shape)
+y_preds = np.argmax(y_preds ,axis=1)
+y_preds.shape
+
+accuracy_score(np.argmax(y_train, axis=1), y_preds)
+
+ConfusionMatrixDisplay(confusion_matrix(np.argmax(y_train, axis=1), y_preds)).plot()
+
+# Test performance
+y_preds = optim.predict(input_layer, X_test.toarray(), y_test, batch_size=32)
+print (y_preds.shape)
+y_preds = np.argmax(y_preds ,axis=1)
+y_preds.shape
+
+accuracy_score(np.argmax(y_test, axis=1), y_preds)
+
+ConfusionMatrixDisplay(confusion_matrix(np.argmax(y_test, axis=1), y_preds)).plot()
+
+# Increasing complexity of model
+input_layer = Dense(128, inp_dim=12814, reg=0.00005)
+relu1 = Activation(func='relu')(input_layer)
+hidden1 = Dense(64, reg=0.00005)(relu1)
+relu2 = Activation(func='relu')(hidden1)
+hidden2 = Dense(3, reg=0.00005)(relu2)
+out_layer = Activation(func='softmax')(hidden2)
+
+optim = Optimizer()
+optim.train(input_layer, out_layer, X_train.toarray(), y_train, batch_size=32)
+
+optim = Optimizer(lr=0.0004)
+optim.train(input_layer, out_layer, X_train.toarray(), y_train, batch_size=32)
+
+y_preds = optim.predict(input_layer, X_train.toarray(), y_train, batch_size=32)
+print (y_preds.shape)
+y_preds = np.argmax(y_preds ,axis=1)
+y_preds.shape
+
+accuracy_score(np.argmax(y_train, axis=1), y_preds)
+
+ConfusionMatrixDisplay(confusion_matrix(np.argmax(y_train, axis=1), y_preds)).plot()
+
+y_preds = optim.predict(input_layer, X_test.toarray(), y_test, batch_size=32)
+print (y_preds.shape)
+y_preds = np.argmax(y_preds ,axis=1)
+y_preds.shape
+
+accuracy_score(np.argmax(y_test, axis=1), y_preds)
+
+ConfusionMatrixDisplay(confusion_matrix(np.argmax(y_test, axis=1), y_preds)).plot()</code></pre>
+
+                <h2>Results</h2>
+                
+                <p>
+                  NNs were trained to predict product categories in PART 1 and to predict user ratings in PART 2. We will go over the results obtained in both parts in this section.
+                </p>
+
+                <h3>PART 1</h3>
+
+                <p>
+                  The targer variable or the labels for this part were the product categories (<code>category_1</code> column).
+                </p>
+
+                <p>The number of data points in each of the categoris in the dataset that was used to train the NN is shown below.</p>
+
+                <pre><code class="language-css">Computers & Accessories      2097
+Camera & Photo               1413
+Accessories & Supplies        901
+Headphones                    345
+Car & Vehicle Electronics     259</code></pre>
+
+                <p>
+                  The code snippet below shows the model structure that was used to build the NN for this task. The <code>Dense</code> layer is the fully connected layer and the <code>Activation</code> layer applies the activation function to dense layer outputs. The activation can be <code>relu</code> or <code>softmax</code> as these were the only ones that were programmed in the code for now. <code>Dense</code> layer also has an optional parameter <code>reg</code> to set the strength of regularization.
+                </p>
+
+                <pre><code class="language-python line-numbers">input_layer = Dense(128, inp_dim=12814)
+relu1 = Activation(func='relu')(input_layer)
+hidden1 = Dense(16)(relu1)
+relu2 = Activation(func='relu')(hidden1)
+hidden2 = Dense(5)(relu2)
+out_layer = Activation(func='softmax')(hidden2)</code></pre>
+
+                <p>The diagram below shows this same architecture.</p>
+
+                <img class="img-fluid rounded-4 mb-4" src="assets/img/nn_arch1.png">
+
+                <p>
+                  The <code>Optimizer</code> class has all the logic for running stochastic gradient descent using the <code>Adam</code> optimizer. The lines below intantiate a Optimizer class object and run the optimization on the model defined above.
+                </p>
+
+                <pre><code class="language-python line-numbers">optim = Optimizer()
+optim.train(input_layer, out_layer, X_train.toarray(), y_train, batch_size=32)</code></pre>
+
+                <p>
+                  Below is the output of this training procedure.
+                </p>
+
+                <pre><code class="language-css">Using batch_size of 32
+epoch: 1 loss: 9.0835497511034
+epoch: 2 loss: 5.627354027365108
+epoch: 3 loss: 2.8488033601707823
+epoch: 4 loss: 1.809236777740621
+epoch: 5 loss: 1.4646630405186054
+epoch: 6 loss: 1.2984614230235805
+epoch: 7 loss: 1.2226737171797792
+epoch: 8 loss: 1.2078442738719763
+epoch: 9 loss: 1.2040492051503908
+epoch: 10 loss: 1.2071564080118804
+epoch: 11 loss: 1.1961149257665502
+epoch: 12 loss: 1.1820999220037356
+epoch: 13 loss: 1.1654196096438798
+epoch: 14 loss: 1.1482253941581655
+epoch: 15 loss: 1.1354075124837841
+epoch: 16 loss: 1.1272917021142663
+epoch: 17 loss: 1.1250713103553833
+epoch: 18 loss: 1.1246932546698154
+epoch: 19 loss: 1.1236191247953566
+epoch: 20 loss: 1.1178958371945111
+epoch: 21 loss: 1.114463972307903
+epoch: 22 loss: 1.110737754882579
+epoch: 23 loss: 1.1119677393105127
+epoch: 24 loss: 1.1131126613212692
+epoch: 25 loss: 1.1132708806015106
+epoch: 26 loss: 1.113328857357208
+epoch: 27 loss: 1.112992146617963
+epoch: 28 loss: 1.112667947142416
+epoch: 29 loss: 1.1173736035815736
+epoch: 30 loss: 1.1159828462807402
+epoch: 31 loss: 1.113082069762073
+epoch: 32 loss: 1.1125344730251974
+epoch: 33 loss: 1.1085861229529572
+epoch: 34 loss: 1.1055120414573036
+epoch: 35 loss: 1.103238795489105
+epoch: 36 loss: 1.1049460147507126
+epoch: 37 loss: 1.1054671118960286
+epoch: 38 loss: 1.1074457437574334
+epoch: 39 loss: 1.1034068725181558
+epoch: 40 loss: 1.1005332534415784
+epoch: 41 loss: 1.0914784149251688
+epoch: 42 loss: 1.0835668307629225
+epoch: 43 loss: 1.0783106508971505
+epoch: 44 loss: 1.0791490518737585
+epoch: 45 loss: 1.079509947253525
+epoch: 46 loss: 1.0799132859114462
+epoch: 47 loss: 1.0759454640162112
+epoch: 48 loss: 1.0686820906897891
+epoch: 49 loss: 1.0637858938859217
+epoch: 50 loss: 1.061514074965842
+epoch: 51 loss: 1.0570239471333889
+epoch: 52 loss: 1.0583093747116437
+epoch: 53 loss: 1.0574341017914877
+epoch: 54 loss: 1.0568922538713712
+epoch: 55 loss: 1.0565311082357702
+epoch: 56 loss: 1.0531882407808812
+epoch: 57 loss: 1.0454536000586419
+epoch: 58 loss: 1.0444733128970352
+epoch: 59 loss: 1.0428572400119958
+epoch: 60 loss: 1.0416449199684312
+epoch: 61 loss: 1.0417967933057586
+epoch: 62 loss: 1.040446438564027
+epoch: 63 loss: 1.0400021531628922
+epoch: 64 loss: 1.03921118848454
+epoch: 65 loss: 1.0373236950083915
+epoch: 66 loss: 1.0353671272325935
+epoch: 67 loss: 1.0314426409761113
+epoch: 68 loss: 1.0271134634496364
+epoch: 69 loss: 1.0234410899869535
+epoch: 70 loss: 1.0206975513774321
+epoch: 71 loss: 1.0178466074274855
+epoch: 72 loss: 1.0146108330277306
+epoch: 73 loss: 1.013360890259276
+epoch: 74 loss: 1.0139260016565272
+epoch: 75 loss: 1.0125480934410567
+epoch: 76 loss: 1.0091181702035208
+epoch: 77 loss: 1.0059051434867095
+epoch: 78 loss: 1.0060585718567399
+epoch: 79 loss: 1.008517545353422
+epoch: 80 loss: 1.0114564660236158
+epoch: 81 loss: 1.0132992365287719
+epoch: 82 loss: 1.0173585685575017
+epoch: 83 loss: 1.0198470647511566
+epoch: 84 loss: 1.024723848110011
+epoch: 85 loss: 1.0263143288772238
+epoch: 86 loss: 1.028254681919587
+epoch: 87 loss: 1.028843928732089
+epoch: 88 loss: 1.0309269409286528
+epoch: 89 loss: 1.0332912745172873
+epoch: 90 loss: 1.0361953604263592
+epoch: 91 loss: 1.0393829094188634
+epoch: 92 loss: 1.0413041086381158
+epoch: 93 loss: 1.04468549222457
+epoch: 94 loss: 1.0477871637689102
+epoch: 95 loss: 1.0496716681710079
+epoch: 96 loss: 1.0489375367911318
+epoch: 97 loss: 1.0514739201988148</code></pre>
+
+                <p>
+                  We see that the loss is slowly decreasing and the algorithm stops after 97 epochs since there was no improvement in the loss for <code>20</code> consecutive epochs.
+                </p>
+
+                <p>On testing this trained model on the test set, we observe the following confusion matrix.</p>
+
+                <img class="img-fluid rounded-4 mb-4" src="assets/img/nn_confusion_mat_1.png">
+
+                <p>The accuraracy and classification report for the model is shown below.</p>
+
+                <pre><code class="language-css">accuracy: 0.5862412761714856
+              precision    recall  f1-score   support
+
+           0       0.51      0.20      0.28       194
+           1       0.56      0.74      0.64       287
+           2       0.43      0.05      0.09        59
+           3       0.60      0.74      0.66       401
+           4       0.77      0.66      0.71        62
+
+    accuracy                           0.59      1003
+   macro avg       0.58      0.48      0.48      1003
+weighted avg       0.57      0.59      0.55      1003</code></pre>
+
+                <p>
+                  We see that the accuracy of this model is on par with some the best results we have obtained for this classification throughout this project. Although we do see very poor performance for the minority classes. Since this code did not have implementation for weighted classes, an experiment with using higher weights for minority classes was difficult to run. However we do see a decent performance on 3 of the 5 classes (as per f1-scores).
+                </p>
+
+                <p>This problem has been explored extensively in other section of the project. Therefore, the following part covers a new problem.</p>
+
+                <h3>PART 2</h3>
+
+                <p>
+                  This part tries to observe if it is possible to predict user ratings based on the text of the reviews. The part again makes use of TFIDF vectorized text and one-hot encoded ratings as lebels (or targets).
+                </p>
+
+                <p>
+                  The number of data points having different ratings are shown below.
+                </p>
+
+                <pre><code class="language-css">5.0    2561
+4.0    1150
+1.0     499
+3.0     490
+2.0     315</code></pre>
+
+
+                <p>
+                  The output shows a lot of points with 4 and 5 as ratings and very few (in comparison) for the 1, 2 and 3 ratting scores. So to simplify the problem to some extent, these categories were encoded as <code>high</code> (for rating = 5), <code>moderate</code> (for rating = 4) and <code>low</code> (for rating in {1,2,3}).
+                </p>
+
+                <p>These encodings were then used to generate the one-hot encoded labels since the implementation shown above does not do this automatically.</p>
+
+                <p>
+                  The model that was used to train for this task is shown as code and diagram below.
+                </p>
+
+                <pre><code class="language-python line-numbers">input_layer = Dense(128, inp_dim=12814)
+relu1 = Activation(func='relu')(input_layer)
+hidden1 = Dense(16)(relu1)
+relu2 = Activation(func='relu')(hidden1)
+hidden2 = Dense(3)(relu2)
+out_layer = Activation(func='softmax')(hidden2)</code></pre>
+
+                <img class="img-fluid rounded-4 mb-4" src="assets/img/nn_arch2.png">
+
+                <p>
+                  The model was then optimized in the same way as in PART 1. The code is shown below, The default learning rate in the above implementation is set to <code>0.001</code>.
+                </p>
+
+                <pre><code class="language-python line-numbers">optim = Optimizer()
+optim.train(input_layer, out_layer, X_train.toarray(), y_train, batch_size=32)</code></pre>
+
+                <p>
+                  Below is the output of this training procedure.
+                </p>
+
+                <pre><code class="language-css">Using batch_size of 32
+epoch: 1 loss: 8.321518061011657
+epoch: 2 loss: 5.445246394971871
+epoch: 3 loss: 2.9642780009617797
+epoch: 4 loss: 1.6403480777138448
+epoch: 5 loss: 1.2185448995979151
+epoch: 6 loss: 1.089915616461989
+epoch: 7 loss: 1.0319098705932401
+epoch: 8 loss: 1.0110345063685315
+epoch: 9 loss: 0.999048640271273
+epoch: 10 loss: 0.9964210941468851
+epoch: 11 loss: 0.9925904100452937
+epoch: 12 loss: 0.9830922104019385
+epoch: 13 loss: 0.9732794137669527
+epoch: 14 loss: 0.9619556789601377
+epoch: 15 loss: 0.9537778661450566
+epoch: 16 loss: 0.9492270364884011
+epoch: 17 loss: 0.9467762731744287
+epoch: 18 loss: 0.94419347721398
+epoch: 19 loss: 0.9433130605452763
+epoch: 20 loss: 0.9432685568841744
+epoch: 21 loss: 0.9415594133187318
+epoch: 22 loss: 0.9381847718751705
+epoch: 23 loss: 0.9382918294530043
+epoch: 24 loss: 0.9384016664814158
+epoch: 25 loss: 0.9386757793228967
+epoch: 26 loss: 0.9414653406137853
+epoch: 27 loss: 0.9396999530710282
+epoch: 28 loss: 0.9391002380044426
+epoch: 29 loss: 0.9359147173827063
+epoch: 30 loss: 0.934341195793144
+epoch: 31 loss: 0.9315865943910916
+epoch: 32 loss: 0.9310898467787546
+epoch: 33 loss: 0.9276650502076791
+epoch: 34 loss: 0.9239691934201961
+epoch: 35 loss: 0.920851330370902
+epoch: 36 loss: 0.9170782085582324
+epoch: 37 loss: 0.916209312057013
+epoch: 38 loss: 0.9147969339528258
+epoch: 39 loss: 0.9136586550090239
+epoch: 40 loss: 0.9124037397968311
+epoch: 41 loss: 0.914137418084137
+epoch: 42 loss: 0.914274994291089
+epoch: 43 loss: 0.9137661127230586
+epoch: 44 loss: 0.9118320564743132
+epoch: 45 loss: 0.910695939897505
+epoch: 46 loss: 0.9087959623255182
+epoch: 47 loss: 0.9063418310004123
+epoch: 48 loss: 0.9033822963491462
+epoch: 49 loss: 0.9050745510271726
+epoch: 50 loss: 0.9022276248708904
+epoch: 51 loss: 0.9011925838863344
+epoch: 52 loss: 0.9020295804275186
+epoch: 53 loss: 0.9003321178454349
+epoch: 54 loss: 0.9012806646971752
+epoch: 55 loss: 0.9007832082451762
+epoch: 56 loss: 0.9012435288289703
+epoch: 57 loss: 0.9013137062049618
+epoch: 58 loss: 0.9019632085631366
+epoch: 59 loss: 0.9029507891101256
+epoch: 60 loss: 0.9049239915740057
+epoch: 61 loss: 0.9066661743383201
+epoch: 62 loss: 0.9105995638588155
+epoch: 63 loss: 0.9123697506608269
+epoch: 64 loss: 0.9125696259663727
+epoch: 65 loss: 0.912933490346484
+epoch: 66 loss: 0.9137598906113124
+epoch: 67 loss: 0.9149663595230347
+epoch: 68 loss: 0.916971216298615
+epoch: 69 loss: 0.9188956605233641
+epoch: 70 loss: 0.9197736879044891
+epoch: 71 loss: 0.9226090488581957
+epoch: 72 loss: 0.9234651742922788
+epoch: 73 loss: 0.9265489714019992</code></pre>
+
+                <p>
+                  Again we see that the loss decreases with each epoch and the algorithm stops after <code>73</code> epochs since there was no improvement in the last 20 epochs.
+                </p>
+
+                <p>Shown below is the confusion matrix and accuracy for the training data.</p>
+
+                <img class="img-fluid rounded-4 mb-4" src="assets/img/nn_confusion_mat_train_2.png">
+
+                <pre><code class="language-css">accuracy: 0.5914755732801595</code></pre>
+
+                <p>
+                  And below is the confusion matrix and accuracy for the test set.
+                </p>
+
+                <img class="img-fluid rounded-4 mb-4" src="assets/img/nn_confusion_mat_test_2.png">
+
+                <pre><code class="language-css">accuracy: 0.5653040877367896</code></pre>
+
+                <p>
+                  The results show that the traina and test accuracy are not very far. This means that our model has not overfit on the train set. Also we see that the overall accuracy and performance have scope for improvement. Because there is little overfitting and still scope for improvement, we can increase the complexity oif the model by adding more units in the hidden layer and dialing down the regularization. The new model with these changes is shown below.
+                </p>
+
+                <pre><code class="language-python line-numbers">input_layer = Dense(128, inp_dim=12814, reg=0.00005)
+relu1 = Activation(func='relu')(input_layer)
+hidden1 = Dense(64, reg=0.00005)(relu1)
+relu2 = Activation(func='relu')(hidden1)
+hidden2 = Dense(3, reg=0.00005)(relu2)
+out_layer = Activation(func='softmax')(hidden2)</code></pre>
+
+                <img class="img-fluid rounded-4 mb-4" src="assets/img/nn_arch3.png">
+
+                <p>
+                  The model was then optimized on the training data using the snippet shown below. The default learning rate is <code>0.001</code>.
+                </p>
+
+                <pre><code class="language-python line-numbers">optim = Optimizer()
+optim.train(input_layer, out_layer, X_train.toarray(), y_train, batch_size=32)</code></pre>
+
+                <p>The output of this process is shown below.</p>
+
+                <pre><code class="language-css">Using batch_size of 32
+epoch: 1 loss: 11.440429345311689
+epoch: 2 loss: 10.064108625338351
+epoch: 3 loss: 7.971732681922244
+epoch: 4 loss: 5.891922766067377
+epoch: 5 loss: 4.173541345119224
+epoch: 6 loss: 2.939616230396146
+epoch: 7 loss: 2.212795159392059
+epoch: 8 loss: 1.7697670765793012
+epoch: 9 loss: 1.475265443834406
+epoch: 10 loss: 1.297153284572833
+epoch: 11 loss: 1.1842313177081667
+epoch: 12 loss: 1.1069444421408619
+epoch: 13 loss: 1.04939591156342
+epoch: 14 loss: 1.0188296979464104
+epoch: 15 loss: 0.998542977740094
+epoch: 16 loss: 0.9838169029149025
+epoch: 17 loss: 0.9712143599914912
+epoch: 18 loss: 0.9677486734221873
+epoch: 19 loss: 0.9658495809905815
+epoch: 20 loss: 0.9645841260917478
+epoch: 21 loss: 0.9597764566225916
+epoch: 22 loss: 0.9573131597857798
+epoch: 23 loss: 0.9530185493218676
+epoch: 24 loss: 0.9505969320604111
+epoch: 25 loss: 0.9492976898997754
+epoch: 26 loss: 0.9474826340299851
+epoch: 27 loss: 0.9476386087193425
+epoch: 28 loss: 0.9509519311801921
+epoch: 29 loss: 0.951683871122204
+epoch: 30 loss: 0.9512955498275475
+epoch: 31 loss: 0.9558026158844641
+epoch: 32 loss: 0.9549851478779943
+epoch: 33 loss: 0.9600617578365231
+epoch: 34 loss: 0.9631192374131097
+epoch: 35 loss: 0.958319043355749
+epoch: 36 loss: 0.9648667725085542
+epoch: 37 loss: 0.9584166133708717
+epoch: 38 loss: 0.9657525173639664
+epoch: 39 loss: 0.967095567564788
+epoch: 40 loss: 0.9655208157922781
+epoch: 41 loss: 0.9605816053792405
+epoch: 42 loss: 0.9546429795722902
+epoch: 43 loss: 0.9529691932297716
+epoch: 44 loss: 0.9555321551148268
+epoch: 45 loss: 0.9508346928314463
+epoch: 46 loss: 0.9506307417766098</code></pre>
+
+              <p>The training process was restarted after the above optimization with a reduced learning rate (<code>0.0004</code>). The snippet is shown below.</p>
+
+              <pre><code class="language-python line-numbers">optim = Optimizer(lr=0.0004)
+optim.train(input_layer, out_layer, X_train.toarray(), y_train, batch_size=32)</code></pre>
+
+              <p>And the output is shown below.</p>
+
+              <pre><code class="language-css">Using batch_size of 32
+epoch: 1 loss: 0.9051638383096022
+epoch: 2 loss: 0.9044988401631517
+epoch: 3 loss: 0.9049319655261865
+epoch: 4 loss: 0.905092776275469
+epoch: 5 loss: 0.9043460841194689
+epoch: 6 loss: 0.9040711387333723
+epoch: 7 loss: 0.904534672904988
+epoch: 8 loss: 0.9050790112268547
+epoch: 9 loss: 0.90514288963844
+epoch: 10 loss: 0.9048616058994841
+epoch: 11 loss: 0.9045353225381295
+epoch: 12 loss: 0.9034793496815324
+epoch: 13 loss: 0.9031951806465164
+epoch: 14 loss: 0.9045506405160262
+epoch: 15 loss: 0.9044715735863773
+epoch: 16 loss: 0.9062937816535438
+epoch: 17 loss: 0.9068722987159011
+epoch: 18 loss: 0.9085824650095546
+epoch: 19 loss: 0.9099026308623448
+epoch: 20 loss: 0.910466562263091
+epoch: 21 loss: 0.9109443494736381
+epoch: 22 loss: 0.9103988891735877
+epoch: 23 loss: 0.9100608332309993
+epoch: 24 loss: 0.9098952682011808
+epoch: 25 loss: 0.9099247502591502
+epoch: 26 loss: 0.9106795675947351
+epoch: 27 loss: 0.9114991234903344
+epoch: 28 loss: 0.9121330327776791
+epoch: 29 loss: 0.9134381095992277
+epoch: 30 loss: 0.9129221055947595
+epoch: 31 loss: 0.9122908902277589
+epoch: 32 loss: 0.9112909400273164
+epoch: 33 loss: 0.9121843181076331</code></pre>
+
+              <p>The confusion matrix and accuracy for this model on the train data are shown below.</p>
+
+              <img class="img-fluid rounded-4 mb-4" src="assets/img/nn_confusion_mat_train_3.png">
+
+              <pre><code class="language-css">accuracy: 0.6360917248255235</code></pre>
+
+              <p>The confusion matrix and accuracy for this model on the test data are shown below.</p>
+
+              <img class="img-fluid rounded-4 mb-4" src="assets/img/nn_confusion_mat_test_3.png">
+
+              <pre><code class="language-css">accuracy: 0.5613160518444666</code></pre>
+
+              <p>We see that there is some overfitting in this model. The performance on the test set has remained almost the same. We see a poor performance on the <code>moderate</code> class, but the other two classes (<code>high, low</code>) have an acceptable performance though not very useful.</p>
+
+              <p>
+                There are manny ways these NNs can be further improved for performance. We can include a dropouts layer that can allow us to have a more complex model since dropouts prevents overfitting. We can also program a learning rate schedule to automatically decrease the learing rate as was done manually in this case to reduce the overall loss. Moreover, class weights and oversampling can be used to improve the performance of the model on the minority classes.
+              </p>
+
+              <h2>Conclusion</h2>
+
+              <p>
+                In this section, a simple neural network framework with very limited functionalities was implemented in python and was employed to study two problems. First, can the category of the product be predicted using review text? And second, can the user rating be predicted using a review text.
+              </p>
+
+              <p>
+                We saw that the simple NN that was possible with this code could achieve an accuracy of <code>58.6%</code>. This is in the good ranges when compared to the accuracies, for this problem, that we have observed thoughout this project. Although, the performance on all classes was not acceptable, we still observed a decent performance on 3 classes.
+              </p>
+
+              <p>
+                In the second part, we targetted the user ratings, and tried to find if these can be predicted using the review text. This is a problem that has not been explored so far in this project. In the first model, we saw a <code>59%</code> accuracy on the training data and <code>56.5%</code> accuracy on the test data. The performance observed was not particularly great on any of the classes. But we did observe very little overfitting and the decision to increase the complexity of the model was made. The new model had <code>64 (instead of 16)</code> units in the hidden layer and the regularization was decreased to <code>0.00005</code> from <code>0.001</code>.
+              </p>
+
+              <p>
+                This model increased the training accuracy to <code>63%</code> and the test accuracy remained at <code>56%</code>. This performance was not very impressive although it was better than random.
+              </p>
+
+              <p>
+                These NNs could be improved further using a variety of techniques typical to NNs,
+                <ul>
+                  <li>Adding dropouts layers</li>
+                  <li>Using learning rate schedules to decrease the learning rates at plateaus</li>
+                  <li>Using weighted classes or oversampling in minority classes</li>
+                </ul>
+              </p>
+
+              <p>
+                This project demonstrates the potential of neural networks to solve classification problems using natural language processing. Despite the limited functionality of our simple neural network framework, we were able to achieve reasonable accuracy on predicting the category of a product and the user rating using review text. While the performance can still be improved, the results show the promise of using neural networks to analyze text data and make predictions. As the field of machine learning continues to evolve, we can expect to see more sophisticated neural networks being developed and applied to a wider range of problems, opening up new possibilities for AI applications.
+              </p>
+
+            </div>
+
+
+            <div>
+              
+            </div>
+
+              
+
+          <!-- <div class="col-lg-3">
+            <div class="portfolio-info">
+              <h3>Project information</h3>
+              <ul>
+                <li><strong>Category</strong> <span>Web design</span></li>
+                <li><strong>Client</strong> <span>ASU Company</span></li>
+                <li><strong>Project date</strong> <span>01 March, 2020</span></li>
+                <li><strong>Project URL</strong> <a href="#">www.example.com</a></li>
+                <li><a href="#" class="btn-visit align-self-start">Visit Website</a></li>
+              </ul>
+            </div>
+          </div> -->
+
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Details Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+
+    <div class="container">
+      <div class="row gy-4">
+
+        <div class="col-lg-10 col-12 footer-links">
+          <h4>Useful Links</h4>
+          <ul>
+            <li><a href="https://github.com/anup44/machine_learning_project" target="_blank"><strong>All code files:</strong> https://github.com/anup44/machine_learning_project</a></li>
+            <li><a href="https://jmcauley.ucsd.edu/data/amazon_v2/metaFiles2/meta_Electronics.json.gz" target="_blank"><strong>Amazon products metadata for Electrinics category:</strong> https://jmcauley.ucsd.edu/data/amazon_v2/metaFiles2/meta_Electronics.json.gz</a></li>
+            <li><a href="https://github.com/anup44/machine_learning_project/blob/main/product_reviews_1000.json" target="_blank"><strong>Scraped Product reviews data:</strong> https://github.com/anup44/machine_learning_project/blob/main/product_reviews_1000.json</a></li>
+            <li><a href="https://github.com/anup44/machine_learning_project/blob/main/tokens_tfidf_vectorized_sample.csv" target="_blank"><strong>TFIDF Vectorized sample data:</strong> https://github.com/anup44/machine_learning_project/blob/main/tokens_tfidf_vectorized_sample.csv</a></li>
+            <li><a href="https://github.com/anup44/machine_learning_project/blob/main/neural_nets.ipynb" target="_blank"><strong>Code for Neural Netwoks:</strong> https://github.com/anup44/machine_learning_project/blob/main/neural_nets.ipynb</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+  </footer><!-- End Footer -->
+  <!-- End Footer -->
+
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/prism.js"></script>
+
+</body>
+
+</html>

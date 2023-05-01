@@ -66,10 +66,11 @@
         <ul>
           <li><a href="#hero">Home</a></li>
           <li><a href="#about">Introduction</a></li>
-          <li><a href="dataprep.html">Data Prep & EDA</a></li>
-          <li><a href="#services">Conclusion</a></li>
+          <li><a href="#navigation">Sections</a></li>
+          <li><a href="#conclusion">Conclusion</a></li>
           <li class="dropdown"><a href="#"><span>Show more</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
+              <li><a href="dataprep.html">Data Prep & EDA</a></li>
               <li><a href="clustering.html">Clustering</a></li>
               <!-- <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                 <ul>
@@ -84,7 +85,8 @@
               <li><a href="naivebayes.html">Naive Bayes</a></li>
               <li><a href="decisiontree.html">Decision Trees</a></li>
               <li><a href="svm.html">SVMs</a></li>
-              <li><a href="#">Neural Networks</a></li>
+              <li><a href="neuralnets.html">Neural Networks</a></li>
+              <li><a href="linreg.html">Linear Regression</a></li>
 
             </ul>
           </li>
@@ -167,23 +169,23 @@
               In addition, reviews can be a powerful tool for building brand awareness and credibility. Positive reviews can encourage potential customers to try a product or service, while negative reviews can help businesses identify areas for improvement and show customers that they take feedback seriously. By leveraging review data effectively, businesses can build stronger relationships with their customers and improve their bottom line.
             </p>
 
-            <!-- <p>Some similar work:</p>
+            <h3>Some similar work:</h3>
             <div class="content ps-0">
               <ul>
                 <li><i class="bi bi-circle-fill"></i>"Exploring Consumer Behavioral Intention towards Online Reviews: Evidence from Amazon" is a study published in 2020 by authors M. Ali, H. Ahmed, and A. A. Ayub. The paper aims to investigate the impact of online reviews on consumer behavior and purchasing decisions on Amazon. The authors used a survey to gather data from a sample of Amazon customers and analyzed the results using regression analysis. The study found that the number of reviews, review ratings, and the helpfulness of reviews all have a significant impact on consumer behavioral intention towards a product. The authors conclude that online reviews play a crucial role in shaping consumer behavior and purchasing decisions on Amazon and should be taken into consideration by businesses and marketers.</li>
                 <li><i class="bi bi-circle-fill"></i>"Exploring the Effects of Review Characteristics on Consumer Perception of Online Reviews: A Study of Amazon Reviews" by J. Huang and S. Javalgi (2019) - This study investigates the effects of review characteristics, such as review length, review helpfulness, and review sentiment, on consumer perception of online reviews, using data from Amazon product reviews.</li>
               </ul>
-            </div> -->
+            </div>
           </div>
           <div class="col-lg-6">
 
-            <div class="content ps-0 ps-lg-5">
+            <!-- <div class="content ps-0 ps-lg-5">
               <h3>Some similar work:</h3>
               <ul>
                 <li><i class="bi bi-circle-fill"></i>"Exploring Consumer Behavioral Intention towards Online Reviews: Evidence from Amazon" is a study published in 2020 by authors M. Ali, H. Ahmed, and A. A. Ayub. The paper aims to investigate the impact of online reviews on consumer behavior and purchasing decisions on Amazon. The authors used a survey to gather data from a sample of Amazon customers and analyzed the results using regression analysis. The study found that the number of reviews, review ratings, and the helpfulness of reviews all have a significant impact on consumer behavioral intention towards a product. The authors conclude that online reviews play a crucial role in shaping consumer behavior and purchasing decisions on Amazon and should be taken into consideration by businesses and marketers.</li>
                 <li><i class="bi bi-circle-fill"></i>"Exploring the Effects of Review Characteristics on Consumer Perception of Online Reviews: A Study of Amazon Reviews" by J. Huang and S. Javalgi (2019) - This study investigates the effects of review characteristics, such as review length, review helpfulness, and review sentiment, on consumer perception of online reviews, using data from Amazon product reviews.</li>
               </ul>
-            </div>
+            </div> -->
 
             <div class="content ps-0 ps-lg-5">
               <h3>
@@ -191,29 +193,69 @@
               </h3>
               <ul>
                 <li><i class="bi bi-check-circle-fill"></i> What is the average rating of products across different categories?</li>
+                <p>
+                  In the data preparation section, we have plotted a graph to check the average rating across categories. The plot can be found <a href="dataprep.html#:~:text=mean%20rating%20in%20reviews" target="_blank">here</a>. We can see that an average rating of over 4 can be found for categories such as ebook Readers and Accessories, Accessories and Supplies, Wearable Technology. All other sections have a mean rating between 3.5 and 4 except for Television and Video, which has an average rating of 3.3.
+                </p>
+
                 <li><i class="bi bi-check-circle-fill"></i> What is the distribution of reviews across different rating categories?</li>
+                <p>
+                  The answer to this question can be found <a href="neuralnets.html#:~:text=data%20points%20having%20different%20ratings" target="_blank">here</a>. This result shows that we have a large number of reviews with 5 and 4 star rating and fewer review with low ratings.
+                </p>
+
                 <li><i class="bi bi-check-circle-fill"></i>What are the most commonly used words in product reviews?</li>
+                <p>
+                  This question can be answered by looking at the wordclouds <a href="dataprep.html#:~:text=code%20will%20generate-,wordclouds,-corresponding%20to%20the" target="_blank">here</a>. We see different words that are used commonly in different categories. For example, we see 'cable' and 'remote' in Accessories & supplies, words like "good", "great", "battery", "price", "picture" in Camera and Photo.
+                </p>
+
                 <li><i class="bi bi-check-circle-fill"></i>What is the correlation between product ratings and the number of reviews?</li>
+                <p>
+                  <a href="dataprep.html#:~:text=average%20rating%20that%20a%20product" target="_blank">This</a> plot tries to answer exactly this question. The plot does give a hint that in this dataset, the products that had between 10 to 17 reviews have a slightly higher mean rating. But the trend line suggests that no discernible pattern really exists. However, we see that the fit line is horizintal, meaning that the number of reviews has no relationship with the product ratings.
+                </p>
+                
                 <li><i class="bi bi-check-circle-fill"></i>How does the sentiment of reviews vary across different product categories?</li>
+                <p>
+                  In this project, sintiment analysis on the text data was not performed. Therefore, this question can not be answered with the available information.
+                </p>
+
                 <li><i class="bi bi-check-circle-fill"></i>Can product ratings be predicted based on the text of the review?</li>
-                <li><i class="bi bi-check-circle-fill"></i>What are the most popular products within each category?</li>
-                <li><i class="bi bi-check-circle-fill"></i>How do product ratings change over time, and what factors contribute to this change?</li>
+                <p>
+                  <a href="neuralnets.html#:~:text=a%20new%20problem.-,PART%202,-This%20part%20tries" target="_blank">This</a> part in NNs section tries to answer this question. We can see that the accuracy on the test set is 56%. The confusion matrix shows a poor performance on predicting the moderate rating, and accpetable performance in predicting high and low ratings.
+                </p>
+
                 <li><i class="bi bi-check-circle-fill"></i>What is the relationship between product prices and ratings?</li>
+                <p>
+                  The linear regression analysis using prices to predict ratings, shows that the prices pridictor is insignificant in estimating or predicting the rating.
+                </p>
+
                 <li><i class="bi bi-check-circle-fill"></i>What are the most frequently mentioned brands in product reviews?</li>
-                <li><i class="bi bi-check-circle-fill"></i>What are the most important features mentioned in product reviews within each category?</li>
-                <li><i class="bi bi-check-circle-fill"></i>What are the most important features mentioned in product reviews within each category?</li>
+                <p>
+                  <a href="dataprep.html#:~:text=to%20look%20the-,most%20popular%20brands,-in%20our%20data" target="_blank">This</a> plot in the Data Prep section shows the popular brands and number of reviews for those brands. Some of the popular brands in the dataset are "Sony", "Dell", "Philips", "HP", "Garmin" and "Nikon".
+                </p>
+
                 <li><i class="bi bi-check-circle-fill"></i>Can the product categories be accurately classified based on review text?</li>
+                <p>
+                  This question has been explored using various machine learning algorithms in this project. We observe that Naive Bayes and SVM achieved the best results with accuracies close to 75% in trying to predict product categories from review text.
+                </p>
+
                 <li><i class="bi bi-check-circle-fill"></i>Is is possible to determine the relationship between the popularity or rank of a product and the reviews or ratings?</li>
+                <p>
+                  The plot below <a href="dataprep.html#:~:text=relationships%20for%20the%20rank%20column">this</a> text tries to understand this relationship. We observe the expected relationship (higher star rating -> lower rank) in a few categories like Headphones. All other categories show very little trend.
+                </p>
+
                 <li><i class="bi bi-check-circle-fill"></i>What are the most reviewed product categories on Amazon?</li>
-                <li><i class="bi bi-check-circle-fill"></i>How does the average rating of products vary by category?</li>
-                <li><i class="bi bi-check-circle-fill"></i>How does the length of reviews vary by rating?</li>
-                <li><i class="bi bi-check-circle-fill"></i>HHow well do different machine learning algorithms perform in predicting product ratings?</li>
-                <li><i class="bi bi-check-circle-fill"></i>What are the most important features in determining a product's rating?</li>
-                <li><i class="bi bi-check-circle-fill"></i>Can a machine learning model identify fake or biased reviews?</li>
-                <li><i class="bi bi-check-circle-fill"></i>What is the relationship between the price of a product and its rating?</li>
-                <li><i class="bi bi-check-circle-fill"></i>What are the most commonly purchased products together?</li>
-                <li><i class="bi bi-check-circle-fill"></i>What is the relationship between the ratings of a product and the ratings of its "also bought" products?</li>
+                <p>
+                  Within the dataset used for this project, the plot just above<a href="dataprep.html#:~:text=count-,On%20inspection,-%2C%20the%20column%20description" target="_blank">this</a> text shows that "Computers & Accessories", "Accessories $ Supplies", and "Camera & Photo" are among the most reviewed categories.
+                </p>
+
+                <li><i class="bi bi-check-circle-fill"></i>How well do different machine learning algorithms perform in predicting product categories?</li>
+                <p>
+                  In this project, we tried to predict product categories using Naive Bayes, Decision Trees, SVMs and neural networks. Based on this dataset and the work done here, it was observed that Naive Bayes showed best performance (accuracy of 75%) followed by SVMs (accuracy 73%). Decision Trees showed an accuracy of 60% and Neural networks had an accuracy of 56%.
+                </p>
+
                 <li><i class="bi bi-check-circle-fill"></i>Can we identify clusters of products that are often purchased together?</li>
+                <p>
+                  While working on ARMs, we tried to understand the relationships between items that were frequently bought together. In the analysis, it is observed that the data generates about 1.1 million association rules. Although not all rules are very useful, if we are able to find just a few hundred association rules that are meaningful based on their support, confidence and lift values. These rules can help explain several trends in the way users look for items while browsing.
+                </p>
                 
               </ul>
               
@@ -229,6 +271,123 @@
       </div>
     </section><!-- End About Us Section -->
 
+    <!-- ======= Our Services Section ======= -->
+    <section id="navigation" class="services sections-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>Sections</h2>
+          <p>Click on the cards below to navigate through the project.</p>
+        </div>
+
+        <div class="row gy-4" data-aos="fade-up" data-aos-delay="100">
+
+          <div class="col-lg-4 col-md-6">
+            <div class="service-item  position-relative">
+              <div class="icon">
+                <i class="bi bi-activity"></i>
+              </div>
+              <h3>Data Preparation and EDA</h3><br>
+              <a href="dataprep.html" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <i class="bi bi-columns-gap"></i>
+              </div>
+              <h3>Clustering</h3><br>
+              <a href="clustering.html" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <i class="bi bi-bezier2"></i>
+              </div>
+              <h3>Association Rule Mining</h3><br>
+              <a href="arm.html" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <i class="bi bi-bounding-box-circles"></i>
+              </div>
+              <h3>Naive Bayes</h3><br>
+              <a href="naivebayes.html" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <i class="bi bi-diagram-2"></i>
+              </div>
+              <h3>Decision Trees</h3><br>
+              <a href="decisiontree.html" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <i class="bi bi-ui-radios-grid"></i>
+              </div>
+              <h3>Support Vector Machines</h3><br>
+              <a href="svm.html" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <i class="bi bi-modem"></i>
+              </div>
+              <h3>Neural Networks</h3><br>
+              <a href="neuralnets.html" class="readmore stretched-link">Read more <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div><!-- End Service Item -->
+
+        </div>
+
+      </div>
+    </section><!-- End Our Services Section -->
+
+    <!-- ======= Testimonials Section ======= -->
+    <section id="conclusion" class="testimonials">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>Conclusion</h2>
+        </div>
+          <div class="row gy-4">
+            <p>
+              In this project, we have explored a range of machine learning techniques and algorithms for analyzing Amazon reviews data. By leveraging clustering techniques, Association Rule Mining (ARM), Multinomial Naive Bayes, decision trees, Support Vector Machines (SVMs), and neural networks, we have gained valuable insights into their strengths and limitations when applied to natural language processing tasks.
+            </p>
+            <p>
+              One of the key takeaways from our investigation is the importance of careful preprocessing, feature selection, and hyperparameter tuning to improve the performance of these algorithms on text data. Specifically, we have shown that clustering techniques can be challenging for sparse and high-dimensional data, but can still reveal important patterns and relationships in the data when combined with careful preprocessing and feature selection. Additionally, our work on ARM has demonstrated the power of this technique for exploring large and complex datasets and driving data-driven decision-making in various fields, including product bundling, complementary offerings, and targeted marketing strategies.
+            </p>
+            <p>
+              Our analysis of Multinomial Naive Bayes and decision trees has shown promising results for classifying product categories based on Amazon reviews data. Both approaches offer valuable and interpretable ways of analyzing text data for product categorization, and can be useful for e-commerce businesses looking to improve their product recommendations and marketing strategies. However, we acknowledge the limitations of these approaches, such as the Naive Bayes assumption of independence and the tendency of decision trees to overfit.
+            </p>
+            <p>
+              The use of SVMs has highlighted their versatility and reliability in handling high-dimensional data, including text data. While SVMs can be computationally intensive and require careful selection of hyperparameters, they offer solid theoretical foundations and the ability to handle non-linear decision boundaries through kernel functions. We have found that unscaled TFIDF scores and non-linear SVM kernels can significantly enhance model performance.
+            </p>
+            <p>
+              Our work on neural networks has shown the potential and limitations of these models for text classification tasks. We implemented a simple neural network framework and used it to predict the category of products and user ratings based on review text. While the model achieved reasonable accuracy in some cases, there is still much room for improvement. Future work can explore more sophisticated neural network architectures and use techniques such as dropouts, learning rate schedules, and weighted classes to improve performance.
+            </p>
+            <p>
+              In conclusion, our project has demonstrated the value of machine learning for analyzing Amazon reviews data and informing business strategy. By leveraging the power of clustering, association rule mining, Naive Bayes, decision trees, SVMs, and neural networks, we have uncovered significant patterns and relationships within the data that can help businesses optimize their product offerings and improve customer experiences. We hope that our findings will inspire further research and development in this exciting and rapidly evolving field, and we look forward to seeing how these techniques can continue to improve our understanding of natural language processing and its applications in the business world.
+            </p>
+          </div>
+
+      </div>
+    </section><!-- End Testimonials Section -->
+
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
@@ -241,9 +400,7 @@
           <h4>Useful Links</h4>
           <ul>
             <li><a href="https://github.com/anup44/machine_learning_project" target="_blank"><strong>All code files:</strong> https://github.com/anup44/machine_learning_project</a></li>
-            <li><a href="https://github.com/anup44/machine_learning_project/blob/main/read_data.ipynb" target="_blank"><strong>Code for collecting and cleaning data:</strong> https://github.com/anup44/machine_learning_project/blob/main/read_data.ipynb"</a></li>
-            <li><a href="https://github.com/anup44/machine_learning_project/blob/main/visualization.ipynb"><strong>Code for data visualizations:</strong> https://github.com/anup44/machine_learning_project/blob/main/visualization.ipynb</a></li>
-            <li><a href="https://jmcauley.ucsd.edu/data/amazon_v2/metaFiles2/meta_Electronics.json.gz"><strong>Amazon products metadata for Electrinics category:</strong> https://jmcauley.ucsd.edu/data/amazon_v2/metaFiles2/meta_Electronics.json.gz</a></li>
+            <li><a href="https://jmcauley.ucsd.edu/data/amazon_v2/metaFiles2/meta_Electronics.json.gz"><strong>Amazon products metadata for Electronics category:</strong> https://jmcauley.ucsd.edu/data/amazon_v2/metaFiles2/meta_Electronics.json.gz</a></li>
             <li><a href="https://github.com/anup44/machine_learning_project/blob/main/product_reviews_1000.json"><strong>Scraped Product reviews data:</strong> https://github.com/anup44/machine_learning_project/blob/main/product_reviews_1000.json</a></li>
           </ul>
         </div>

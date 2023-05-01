@@ -1,4 +1,5 @@
 **/.DS_Store
+tokens_tfidf_vectorized.csv
 meta_df.parquet
 meta_Electronics.json.gz
 Electronics_5.json

@@ -67,10 +67,11 @@
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="index.html#about">Introduction</a></li>
-          <li><a href="dataprep.html">Data Prep & EDA</a></li>
+          <li><a href="index.html#navigation">Sections</a></li>
           <li><a href="#portfolio">Conclusion</a></li>
           <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
+              <li><a href="dataprep.html">Data Prep & EDA</a></li>
               <li><a href="clustering.html">Clustering</a></li>
               <!-- <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                 <ul>
@@ -85,7 +86,7 @@
               <li><a href="naivebayes.html">Naive Bayes</a></li>
               <li><a href="decisiontree.html">Decision Trees</a></li>
               <li><a href="#">SVM</a></li>
-              <li><a href="#">Neural Networks</a></li>
+              <li><a href="neuralnets.html">Neural Networks</a></li>
             </ul>
           </li>
           <!-- <li><a href="#contact">Contact</a></li> -->
@@ -225,7 +226,7 @@
 
               <p>
                 There are many kernels that are commonly used in SVMs. Some popular examples include, <code>linear</code>, <code>Radial Basis Function (RBF)</code>, <code>polynomial</code> and <code>sigmoid</code>. The polynomial kernel can be defined by the following equation,
-                $$K_{polynomial}(X_i, X_j) = (X_i^T X_j + r)^d$$.
+                $$K_{polynomial}(X_i, X_j) = (X_i^T X_j + r)^d$$
 
                 The RBF kernel looks like this.
                 $$K_{rbf}(X_i, X_j) = \exp{\left[-\frac{||X_i - X_j||^2}{2\sigma^2}\right]}$$
@@ -298,7 +299,7 @@
               <img class="img-fluid rounded-4 mb-4" src="assets/img/svm_data_sample.png">
 
               <p>
-                Since supervised learning methods need to work well on unseen data, that is, the data that was not used for training, this dataset needs to be split into training and testing set. The training set will be used for building the decision tree and the testing set will be used to check if the model is able to predict well on unseen data. This way of measuring the performance of model is required to ensure that our model does not overfit on our data and is able to generalize on new data that might be required to predict on. Since collected data is not a perfect representation of population in most cases, machine learning models generally work better on the data that is used for training and have a slightly, or significantly, worse performance when new data is used for predictions. To account for this bias in the model performance, to some extent, we need to ensure that our training and testing set are disjoint so that we can simulate how the model might perform when it is deployed or used for making predictions.
+                Since supervised learning methods need to work well on unseen data, that is, the data that was not used for training, this dataset needs to be split into training and testing set. The training set will be used for building the SVM and the testing set will be used to check if the model is able to predict well on unseen data. This way of measuring the performance of model is required to ensure that our model does not overfit on our data and is able to generalize on new data that might be required to predict on. Since collected data is not a perfect representation of population in most cases, machine learning models generally work better on the data that is used for training and have a slightly, or significantly, worse performance when new data is used for predictions. To account for this bias in the model performance, to some extent, we need to ensure that our training and testing set are disjoint so that we can simulate how the model might perform when it is deployed or used for making predictions.
               </p>
 
               <p>To create training and testing set, the function <code>train_test_split</code> from the sklearn package was used with <code>test_size = 0.2</code>. Below are two images, showing a sample of the data that was split into training and testing sets.</p>
@@ -775,7 +776,7 @@ Car & Vehicle Electronics       0.51      0.46      0.48        52
 </code></pre>
 
               <p>
-                We see that we again observe very similar results. Increasing the regularization is not improving the performance of the model. In the next model, the regularization is decreased to see how this affects the prediction performance.
+                We see that we again observe very similar results. Decreasing the regularization is not improving the performance of the model. In the next model, the regularization is increased to see how this affects the prediction performance.
               </p>
 
               <pre><code class="language-python line-numbers">clf_svm2 = SVC(C=0.8, kernel='linear', degree=3, 
@@ -873,7 +874,7 @@ Car & Vehicle Electronics       0.00      0.00      0.00        52
 </code></pre>
 
               <p>
-                The next model increases the regularization further.
+                The next model decreases the regularization further.
               </p>
 
               <pre><code class="language-python line-numbers">clf_svm3 = SVC(C=1.4, kernel='poly', degree=3, 
@@ -905,7 +906,7 @@ Car & Vehicle Electronics       0.00      0.00      0.00        52
 </code></pre>
 
               <p>
-                No change in performance is observed. Lets decrease the regularization in the next model.
+                No change in performance is observed. Lets increase the regularization in the next model.
               </p>
 
               <pre><code class="language-python line-numbers">clf_svm3 = SVC(C=0.8, kernel='poly', degree=3, 
@@ -1030,7 +1031,7 @@ Car & Vehicle Electronics       1.00      0.04      0.07        52
              weighted avg       0.75      0.50      0.42      1003</code></pre>
   
               <p>
-                Although the performance has increased slightly, a majority of points from all classes are still being classified as <code>Computers & Accessories</code>. Lets try a model with smaller regularization.
+                Although the performance has increased slightly, a majority of points from all classes are still being classified as <code>Computers & Accessories</code>. Lets try a model with larger regularization.
               </p>
 
               <pre><code class="language-python line-numbers">clf_svm5 = SVC(C=0.8, kernel='rbf', degree=3, 
