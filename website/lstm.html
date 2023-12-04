@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>ML Project - Neural Networks</title>
+  <title>NN Project - Recurrent Neural Networks</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -86,8 +86,10 @@
               <li><a href="naivebayes.html">Naive Bayes</a></li>
               <li><a href="decisiontree.html">Decision Trees</a></li>
               <li><a href="svm.html">SVM</a></li>
-              <li><a href="#">Neural Networks</a></li>
               <li><a href="linreg.html">Linear Regression</a></li>
+              <li><a href="neuralnets.html">Neural Networks</a></li>
+              <li><a href="#">Recurrent Neural Networks</a></li>
+              
             </ul>
           </li>
           <!-- <li><a href="#contact">Contact</a></li> -->
@@ -109,7 +111,7 @@
         <div class="container position-relative">
           <div class="row d-flex justify-content-center">
             <div class="col-lg-6 text-center">
-              <h2>Neural Networks</h2>
+              <h2>Recurrent Neural Networks (LSTM)</h2>
               <!-- <p>Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum dolorem.</p> -->
             </div>
           </div>
@@ -119,7 +121,7 @@
         <div class="container">
           <ol>
             <li><a href="index.html">Home</a></li>
-            <li>Neural Networks</li>
+            <li>Recurrent Neural Networks</li>
           </ol>
         </div>
       </nav>
@@ -147,7 +149,572 @@
                 </figcaption>
               </figure>
 
-              <h2>Data Prep and Code</h2>
+              <h2>Data Gathering</h2>
+
+              <p>
+                For the purpose of testing the LSTM cell, created as part of this project, and to observe if they function as good as the well established frameworks, two datasets will be utilized. These datasets are chosen because results using a trusted frameworks and very similar modelling setups are available and therefore make them ideal candidates to test the networks created in this project.
+              </p>
+
+              <p>
+                The first problem concerns with the detection of Irony in tweets. The dataset for this problem is taken from a challenge in SemEval 2018. The publication related to this challenge is linked here: <a href="https://aclanthology.org/S18-1005" target="_blank">SemEval-2018 Task 3: Irony Detection in English Tweets</a> (Van Hee et al., SemEval 2018).
+              </p>
+              <p>
+                The dataset can be downloaded from the github repository linked here: <a href="https://github.com/Cyvhee/SemEval2018-Task3/tree/master" target="_blank">SemEval2018-Task3</a>.
+              </p>
+
+              <p>
+                This dataset contains <code>3834</code> tweets in the training set each one labelled to tell if it contains irony of not. The testing set contains <code>784</code> labelled examples. To steps taken to prepare the data for modelling, are summarized below.
+                <ol type="1">
+                  <li>Tokenizing the tweets using the tokenizer in spacy's <code>en-core-web-lg</code> model pipeline.</li>
+                  <li>Converting tokens to Lower case</li>
+                  <li>Adding start-of-sentece, end-of-sentece at the start and end of tokenized tweets.</li>
+                  <li>Breaking up data points into batches of pre-determined sizes and adding padding to each batch</li>
+                  <li>Encoding batches and labels to contain word indices and label indices.</li>
+                </ol>
+              </p>
+
+              <p>
+                Since the dataset is rather small and training task in one of binary classification, it is very difficult to train good embeddings from scratch for this model. Therefore, pre-trained GLoVe embeddings (<code>glove.twitter.27B.zip</code>) were downloaded from <a href="https://nlp.stanford.edu/projects/glove/" target="_blank">https://nlp.stanford.edu/projects/glove/</a> and used to create the weights for the embedding layer. Since this embeddings file contains a vocabulary of 1.2 million, it can get very difficult to juggle around all these numbers in the model. Therefore, to make the size of the embedding layer manageable, an indexed vocabulary of all the tokens present in this dataset was created and embeddings for only those tokens were extracted. This reduced the size of the embedding layer from a vocabulary of about 1.2 million to only ~15k.
+              </p>
+
+              <p>
+                The next dataset used to test the model was the built-in <code>Reuters newswire classification dataset</code> in Keras (<a href="https://keras.io/api/datasets/reuters/" target="_blank">https://keras.io/api/datasets/reuters/</a>). Again, this dataset was picked because results, using well-established frameworks, and very similar modelling settings were available for direct comparison. Various decisions that went into tuning the model to improve performance on the dataset were readily available and this made this dataset a good candidate to test the implementation of LSTM in this project.
+              </p>
+
+              <p>
+                The dataset has 8982 samples in the training set and 2246 samples in the testing set. The dataset contained 46 labels for news categories. This dataset already has the sentences encoded and the word to index dictionary is available with the dataset if required. So this removed the requirement for the tokenization steps. For this problem, sequences were all padded to a length of 350 and the ones that are longer than 350 were pruned from the left. The length of 350 was chosen since the 90th percentile lenght was 313 and the largest sentence had a length of ~2k. So a lenght of 350 covered more than 90% of the datapoints and the ones that were very long were pruned to have 350 tokens. Padding to lengths of 2k for all datasets would make computations for a single batch very long and the model may not be able to remember everything from thr very start. So this was thought to be a reasonable compromise.
+              </p>
+
+              <h2>Model implementation</h2>
+
+              <p>
+                This section describes the implementation of neural networks that use the Long Short Term memory cells to create Recurrent networks capable of dealing with sequential data. The section is divided into parts that go over the modelling API and classes used in the implementation, discuss the theoretical LSTM model, and how to adapt the same model in code.
+              </p>
+
+              <h3>Modelling API and Class descriptions</h3>
+              
+              <p>
+                To build a neural network that can combine different types of layers (dense, activations, lstm, loss functions) together like lego blocks and still be able to compute the forward pass, the backward pass and update parameters to train the network, a modular API, with classes that follow certain rules and know how to talk to each other, is required. This part contains a high level-description of the classes used in the implementation and describe how they enable a unified API for training models. 
+              </p>
+
+              <p>
+                Building a neural network that seamlessly combines different types of layers, such as dense, activations, LSTM, and various loss functions, requires a modular API with classes that adhere to specific rules and can communicate effectively with each other. The idea is to create a framework where each layer is a modular "building block" akin to Lego pieces. Each class in the API follows a standard set of rules for implementing essential functionalities like the forward pass, backward pass, and parameter updates, allowing for a cohesive integration of diverse components.
+              </p>
+              <p>
+                In this modular design, the layers are encapsulated within classes, and each class knows how to handle its specific computations during the forward pass, the backward pass for gradient computation, and the subsequent parameter updates for training the network. For instance, the dense layer class may have methods for initializing weights, performing matrix multiplications, and handling biases, while the activation class focuses on applying activation functions and their derivatives. These classes can then be combined to construct a neural network architecture tailored to the specific requirements of a given task.
+              </p>
+              <p>
+                The modular API design not only enhances code organization and readability but also facilitates the creation of complex neural network architectures with ease. By adhering to a consistent interface, users can seamlessly connect different layers, experiment with various architectures, and leverage the flexibility to introduce custom layers or functionalities. This modularity ensures that each component understands how to interact with others, promoting code reuse and simplifying the process of constructing, training, and adapting neural networks for diverse applications.
+              </p>
+
+              <p>
+                To achieve a design that makes this possible, atleast 3 broad categories of class interfaces become apparently important. The first is the Layer interface that can encapsulate the logic for the units of a neural network model that perform the computations, a Model interface that pulls these Layers together from start to the end and stitch them into a NN model and lastly an Optimizer interface that can help the model to learn by encapsulating the logic for gradually updating the weights in its layers. But, in order to not overcomplicate things in this rather simplified implementation, the responsibilities of the Model interface are divided up and given to the Layer and Optimizer interfaces. 
+              </p>
+
+              <h4>The Layer Interface</h4>
+
+              <p>
+                The attributes and methods, which all classes that are to functions as layers in the neural network model, are required to have are as follows.
+              </p>
+
+              <h5>Attributes:</h5>
+              <p>
+                <ul>
+                  <li><strong>inp_dim (int)</strong>: The input dimension of the layer, representing the number of input units or features.</li>
+                  <li><strong>out_dim (int)</strong>: The output dimension of the layer, indicating the number of output units or features.</li>
+                  <li><strong>reg (float)</strong>: A regularization parameter used to control the impact of regularization on the layer's parameters.</li>
+                  <li><strong>inp (Layer)</strong>: Reference to the input layer. When the layer is part of a neural network, this attribute points to the preceding layer in the network. </li>
+                  <li><strong>next (Layer)</strong>: Reference to the next layer in the network. This attribute is used to establish a chain of layers within the neural network.</li>
+                  <li><strong>W (numpy.ndarray)</strong>: Weight matrix of the layer. It represents the weights connecting the input to the output units. In layers such as Activation, this is not required.</li>
+                  <li><strong>b (numpy.ndarray)</strong>: Bias vector of the layer. It represents the biases added to the weighted sum of inputs.</li>
+                  <li><strong>momment1 (numpy.ndarray)</strong>: First-order moment for optimization algorithms (e.g., momentum in gradient descent).</li>
+                  <li><strong>momment2 (numpy.ndarray)</strong>: Second-order moment for optimization algorithms (e.g., adaptive learning rate in Adam optimization).</li>
+                </ul>
+              </p>
+
+              <p>
+                The <code>W</code>, <code>b</code>, <code>momment1</code> and <code>momment2</code> attributes are not used in some layers like <code>Activation</code> and <code>Loss</code>.
+              </p>
+
+              <h5>Methods:</h5>
+
+              <h6><code>initialize_parameters()</code></h6>
+              <ul>
+                <li><strong>Description:</strong> Abstract method that should be implemented by subclasses. It initializes the parameters of the layer, such as weights and biases.</li>
+              </ul>
+
+              <h6><code>__call__(inp)</code></h6>
+              <ul>
+                <li><strong>Description:</strong> Sets the input layer for the current layer and initializes its parameters using the provided input layer.</li>
+                <li><strong>Parameters:</strong>
+                  <ul>
+                    <li><strong>inp (Layer):</strong> The input layer.</li>
+                  </ul>
+                </li>
+                <li><strong>Returns:</strong>
+                  <ul>
+                    <li><strong>Layer:</strong> The current layer with the input set.</li>
+                  </ul>
+                </li>
+              </ul>
+
+              <h6><code>__repr__()</code></h6>
+              <ul>
+                <li><strong>Description:</strong> Returns a string representation of the layer, displaying its output and input dimensions.</li>
+                <li><strong>Returns:</strong>
+                  <ul>
+                    <li><strong>str:</strong> String representation of the layer.</li>
+                  </ul>
+                </li>
+              </ul>
+
+              <h6><code>forward(X, y=None, W=None, b=None)</code></h6>
+              <ul>
+                <li><strong>Description:</strong> Method responsible for executing the forward pass through the layer.</li>
+                <li><strong>Parameters:</strong>
+                  <ul>
+                    <li><strong>X (numpy.ndarray):</strong> Input data.</li>
+                    <li><strong>y (numpy.ndarray, optional):</strong> Target data (optional, used in certain layers).</li>
+                    <li><strong>W (numpy.ndarray, optional):</strong> Custom weight matrix (optional, used for testing or special cases).</li>
+                    <li><strong>b (numpy.ndarray, optional):</strong> Custom bias vector (optional, used for testing or special cases).</li>
+                  </ul>
+                </li>
+                <li><strong>Returns:</strong>
+                  <ul>
+                    <li><strong>numpy.ndarray:</strong> Output of the forward pass. For LSTM and Embedding layers this may be a dictionary of output numpy.ndarray and sequence lengths.</li>
+                  </ul>
+                </li>
+              </ul>
+
+              <h6><code>backward(dO)</code></h6>
+              <ul>
+                <li><strong>Description:</strong> Method responsible for executing the backward pass through the layer. Returns exactly 3 outputs dX, dW and db.</li>
+                <li><strong>Parameters:</strong>
+                  <ul>
+                    <li><strong>dO (numpy.ndarray):</strong> Gradient of the output with respect to the loss.</li>
+                  </ul>
+                </li>
+                <li><strong>Returns:</strong>
+                  <ul>
+                    <li><strong>tuple:</strong> Gradient of the input, weight, and bias.</li>
+                  </ul>
+                </li>
+              </ul>
+
+              <p>
+                Following this interface, the project implements the following layers:
+                <ul>
+                  <li>
+                    <strong>Dense:</strong>
+                    <ul>
+                      <li><strong>Description:</strong> This layer represents a fully connected (dense) layer in a neural network. It applies a linear transformation to the input data.</li>
+                      <li><strong>Attributes:</strong> <code>W</code> (weight matrix), <code>b</code> (bias vector).</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <strong>LSTM:</strong>
+                    <ul>
+                      <li><strong>Description:</strong> This layer implements Long Short-Term Memory (LSTM) units, which are commonly used in recurrent neural networks (RNNs) for sequence modeling.</li>
+                      <li><strong>Attributes:</strong> <code>W</code> (combined weight matrix for forget, input, output, and cell gates), <code>b</code> (bias vector).</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <strong>Embeddings:</strong>
+                    <ul>
+                      <li><strong>Description:</strong> This layer performs embedding of input tokens. It is often used to convert token indices into continuous vector representations.</li>
+                      <li><strong>Attributes:</strong> <code>W</code> (embedding matrix), <code>b</code> (bias vector).</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <strong>Activation:</strong>
+                    <ul>
+                      <li><strong>Description:</strong> This layer implements various activation functions, such as ReLU and Sigmoid, to introduce non-linearity into the network. The <code>Activation</code> layer is a generic layer that can be instantiated with different activation functions. The provided implementation includes <code>ReLU</code>, <code>Softmax</code>, and <code>Sigmoid</code> activation functions. Each instance of the Activation layer specifies the activation function it implements.</li>
+                      <li><strong>Attributes:</strong> <code>act_function</code> (the activation function to use for the instance).</li>
+                    </ul>
+                  </li>
+                  <li>
+                    <strong>Loss:</strong>
+                    <ul>
+                      <li><strong>Description:</strong> This layer calculates the loss between the predicted output and the actual target. It supports mean squared error (MSE) loss. The binary and categorical cross-entropy losses are implemented within the Activation layers under their corresponding activation functions (sigmoid_with_bin_cross_entropy and softmax respectively).</li>
+                      <li><strong>Attributes:</strong> None.</li>
+                    </ul>
+                  </li>
+                </ul>                
+              </p>
+
+              <p>
+                Using these layer classes we can start to chain instances of these layers together to construct a neural network. Since each of these layers contains a <code>next</code> and <code>inp</code> attributes that point to the next and previous layer instance respectively, having a reference to just the first layer enables the forward and backward propagation of inputs and losses though the model. This already takes care of a part of the responsibilities of the otherwise required Model interface.
+              </p>
+
+              <p>
+                Below is a simple example of how a model can be constructed using this interface.
+              </p>
+              
+              <pre><code class="language-python line-numbers">input_layer = Dense(out_dim=64, inp_dim=input_dim)
+relu1 = Activation(func='relu')(dense1)
+dense2 = Dense(out_dim=32)(relu1)
+relu2 = Activation(func='relu')(dense2)
+dense3 = Dense(out_dim=num_classes)(relu2)
+output_layer = Activation(func='softmax')(dense3)</code></pre>
+
+              <p>
+                To propagate the inputs forward through this model, we need a simple function that recursively calls the forward method on the current layer and then passes this output to the layer referenced at next attribute of the current layer.
+              </p>
+
+              <pre><code class="language-python line-numbers">def run_forward(self, input_layer, X, y):
+    layer = input_layer
+    out = X
+    while (layer):
+        out = layer.forward(out, y)
+        layer = layer.next
+    return out</code></pre>
+
+              <h4>The Optimizer Interface</h4>
+
+              <p>
+                This brings us to the second interface in this implementation. Methods similar to <code>run_forward</code>, which run and optimize the model are included in the Optimizer interface. This implementation includes the SGD and Adam optimizers for model weight parameters.
+              </p>
+
+              <h5>Parameters</h5>
+              <ul>
+                  <li><code>lr</code> (float): Learning rate for optimization. Default is 0.001.</li>
+                  <li><code>b1</code> (float): Exponential decay rate for the first moment estimates. Default is 0.9.</li>
+                  <li><code>b2</code> (float): Exponential decay rate for the second moment estimates. Default is 0.999.</li>
+              </ul>
+
+              <h5>Attributes</h5>
+              <ul>
+                  <li><code>b1</code> (float): Exponential decay rate for the first moment estimates.</li>
+                  <li><code>b2</code> (float): Exponential decay rate for the second moment estimates.</li>
+                  <li><code>eps</code> (float): Small constant to prevent division by zero. Default is 1e-8.</li>
+                  <li><code>t</code> (int): Time step counter.</li>
+                  <li><code>lr</code> (float): Learning rate for optimization.</li>
+                  <li><code>loss</code> (list): List to store the training loss over epochs.</li>
+              </ul>
+
+              <h5>Methods</h5>
+              <ul>
+                  <li><code>run_forward(input_layer, X, y)</code>: Computes the forward pass through the network and returns the loss.</li>
+                  <li><code>optimize_step(out_layer, verbose=False)</code>: Performs one optimization step using the Adam algorithm.</li>
+                  <li><code>train(input_layer, out_layer, X, y, batch_size=None, patience=20, epochs=None, verbose=False,
+                          loss_tr_ep=1.0e-10, inputs_batched=False)</code>: Trains the network using the Adam optimizer.</li>
+                  <li><code>predict(input_layer, X, y, batch_size=None, verbose=False)</code>: Performs predictions using the trained model.</li>
+              </ul>
+
+              <h5>Interaction with Layers</h5>
+              <ul>
+                  <li>The optimizer interacts with layers through the forward and backward pass.</li>
+                  <li>During training, the <code>train</code> method iterates through batches, computes the forward pass using the
+                      <code>run_forward</code> method, and performs backpropagation using the <code>optimize_step</code> method.</li>
+                  <li>The <code>optimize_step</code> method updates the weights of each layer using the Adam optimization algorithm.</li>
+                  <li>The <code>predict</code> method performs predictions using the trained model for a given input.</li>
+              </ul>
+
+              <p>Below is a simple example on how this class can be used to train the example model built above.</p>
+
+              <pre><code class="language-python line-numbers"># Create an optimizer instance
+adam_optimizer = Optimizer(lr=0.001, b1=0.9, b2=0.999)
+
+# Train the model
+adam_optimizer.train(input_layer, output_layer, X_train, y_train, batch_size=32, epochs=10, verbose=True)
+
+# Perform predictions
+predictions = adam_optimizer.predict(input_layer, X_test, y_test, batch_size=32, verbose=True)</code></pre>
+
+              <h3>Theoretical LSTM model</h3>
+
+              <p>
+                Long Short-Term Memory networks, or LSTMs, are a special type of recurrent neural networks designed to overcome the challenges of learning long-range dependencies in sequential data. LSTMs introduce a sophisticated gating mechanism that enables them to capture and remember information over extended time intervals, making them well-suited for tasks such as natural language processing, speech recognition, and time-series prediction.
+              </p>
+
+              <p>
+                Lets now zoom into the LSTM layer and start by going over the mathematical formulation of both the forward and backward passes.
+              </p>
+
+              <h4>Forward Pass</h4>
+
+              <p>
+                \begin{align*}
+                f_t &= \sigma(W_f \cdot [h_{t-1}, x_t] + b_f) \\
+                i_t &= \sigma(W_i \cdot [h_{t-1}, x_t] + b_i) \\
+                \tilde{c}_t &= \tanh(W_c \cdot [h_{t-1}, x_t] + b_c) \\
+                o_t &= \sigma(W_o \cdot [h_{t-1}, x_t] + b_o) \\
+                c_t &= f_t \odot c_{t-1} + i_t \odot \tilde{c}_t \\
+                h_t &= o_t \odot \tanh(c_t)
+                \end{align*}
+              </p>
+
+              <p>
+                Where:
+                <ul>
+                  <li> \(f_t\): Forget gate</li>
+                  <li> \(i_t\): Input gate</li>
+                  <li> \(\tilde{c}\): Cell proposals</li>
+                  <li> \(o_t\): Output gate</li>
+                  <li> \(W_{f}, W_{i}, W_{c}, W_{o}\): Weight matrices for gates and proposals</li>
+                  <li> \(b_i, b_f, b_g, b_o\): Bias terms</li>
+                </ul>
+              </p>
+
+              <p>
+                $\mathbf{\odot}$ - represents element-wise product.
+              </p>
+
+              <p>
+                The equations above represent the computations in an LSTM cell at the $t^{th}$ timestep. They show how the hidden output $(h_t)$ and the cell state $(c_t)$ for the $t^{th}$ timestep is computed using the $t-1$ step ($h_{t-1}$ and $c_{t-1}$). This highlights the recurrent nature of the cell as each input in the sequence is processed sequentially at each timestep in a way that enables the model to remember information from the previous timesteps.
+              </p>
+
+              <p>
+                Put simply, an LSTM cell at timestep $t$ uses input at the current timestep ($x_t$) and the hidden state from the previous timestep to compute 3 gates. These gates are vectors of the same dimensions as the hidden outputs and control the flow of information into the model, out of the models and to the next timestep. The <code>input gate</code> controls how much of the new information should be allowed to enter the cell state. The <code>forget gate</code> controls how much of the old information in the cell state should be retained and the <code>output gate</code> controls what information from the cell state flows out through the hidden state and into the next timesteps.
+              </p>
+
+              <h4>Backpropagation</h4>
+
+              <p>
+                Now lets take a look at how gradients backpropagate through the LSTM network. An important thing to note in case of any recurrent network is that gradients flow into each timestep from two directions. One from the loss created as a result of the outputs of current timestep and the second is the gradient flowing in from the next timestep. This can complicate things as the loss at timestep $t$ needs to be backpropagated to all the previous timesteps in the sequence. And this again needs to happen for losses at every timestep in the sequence.
+              </p>
+
+              <p>
+                However, we can break down the total loss due to time step $t$ $(L)$ in to two parts: $L^{[t]}$ and $L'$, where $L^{[t]}$ is the loss at this timestep and $L'$ is the sum of all the losses from $t + 1$ till the end. Next, we can start the backpropagation through timesteps in the reverse direction, and follow these steps:
+                <ol>
+                  <li>calculating gradients for $L^{[t]}$ with respect to outputs in current timestep $(t)$</li>
+                  
+                  <li>aggreagate the gradients for $L'$ with those for $L^{[t]}$. Gradients for $L'$ are received from the next unit, while iteraring backwards through timesteps.</li>
+                  <p>
+                    \begin{align*}
+                    \frac{\partial L}{\partial h_t} &= \frac{\partial L^{[t]}}{\partial h_t} + \frac{\partial L'}{\partial h_t} \\
+                    \frac{\partial L}{\partial h_t} &= \frac{\partial L^{[t]}}{\partial h_t} + dh_{next} \\
+                    \\
+                    \frac{\partial L}{\partial c_t} &= \frac{\partial L^{[t]}}{\partial c_t} + \frac{\partial L'}{\partial c_t} \\
+                    \frac{\partial L}{\partial c_t} &= \frac{\partial L}{\partial h_t} \odot o_t \odot (1 - \tanh^2(c_t)) + dc_{next} \\
+                    \end{align*}
+                  </p>
+                  <li>backpropagate the gradients, for the total loss $L$ due to this timestep, to the weights and add them to the accumulated gradients for the weights.</li>
+    
+                  <h6>Output gate</h6>
+    
+                  <p>
+                    \begin{align*}
+                    \frac{\partial L}{\partial o_t} &= \frac{\partial L}{\partial h_t} \odot \tanh(c_t) \\
+                    \frac{\partial L}{\partial W_o} &= \frac{\partial L}{\partial o_t} \odot (o_t \odot (1 - o_t)) \cdot [h_{t-1}, x_t]^\top \\
+                    \frac{\partial L}{\partial [h_{t-1}, x_t]} &= W_o^\top \cdot \frac{\partial L}{\partial o_t} \odot (o_t \odot (1 - o_t))
+                    \end{align*}
+                  </p>
+    
+                  <h6>Cell state</h6>
+    
+                  <p>
+                    \begin{align*}
+                    \frac{\partial L}{\partial c_t} &= \frac{\partial L^{[t]}}{\partial c_t} + \frac{\partial L'}{\partial c_t} \\
+                    \frac{\partial L}{\partial c_t} &= \frac{\partial L}{\partial h_t} \odot o_t \odot (1 - \tanh^2(c_t)) + dc_{next} \\
+                    \frac{\partial L}{\partial \tilde{c}_t} &= \frac{\partial L}{\partial c_t} \odot i_t \\
+                    \frac{\partial L}{\partial W_c} &= \frac{\partial L}{\partial \tilde{c}_t} \odot (1 - \tilde{c}_t^2) \cdot [h_{t-1}, x_t]^\top \\
+                    \frac{\partial L}{\partial [h_{t-1}, x_t]} &+= W_c^\top \cdot \frac{\partial L}{\partial \tilde{c}_t} \odot (1 - \tilde{c}_t^2) \\
+                    dc_{prev} = \frac{\partial L}{\partial c_{t-1}} &= \frac{\partial L}{\partial c_t} \odot f_t \\
+                    \end{align*}
+                  </p>
+    
+                  <h6>Input gate</h6>
+    
+                  <p>
+                    \begin{align*}
+                    \frac{\partial L}{\partial i_t} &= \frac{\partial L}{\partial c_t} \odot \tilde{c}_t \\
+                    \frac{\partial L}{\partial W_i} &= \frac{\partial L}{\partial i_t} \odot (i_t \odot (1 - i_t)) \cdot [h_{t-1}, x_t]^\top \\
+                    \frac{\partial L}{\partial [h_{t-1}, x_t]} &+= W_i^\top \cdot \frac{\partial L}{\partial i_t} \odot (i_t \odot (1 - i_t))
+                    \end{align*}
+                  </p>
+    
+                  <h6>Forget gate</h6>
+    
+                  <p>
+                    \begin{align*}
+                    \frac{\partial L}{\partial f_t} &= \frac{\partial L}{\partial c_t} \odot c_{t-1} \\
+                    \frac{\partial L}{\partial W_f} &= \frac{\partial L}{\partial f_t} \odot (f_t \odot (1 - f_t)) \cdot [h_{t-1}, x_t]^\top \\
+                    \frac{\partial L}{\partial [h_{t-1}, x_t]} &+= W_f^\top \cdot \frac{\partial L}{\partial f_t} \odot (f_t \odot (1 - f_t))
+                    \end{align*}
+                  </p>
+
+                  <li>calculate the gradients with respect outputs in previous unit for $L$ and repeat till we reach the first timestep</li>
+                  $$
+                    dc_{prev} = \frac{\partial L}{\partial c_{t-1}} = \frac{\partial L}{\partial c_t} \odot f_t \\
+                  $$
+                  <p>
+                    $dh_{prev}$ is the added from the backpropagating through all the gates since $x_t$ and $h_{t-1}$ are involved in computing each of the gates and state proposals $(\tilde{c})$.
+                  </p>
+
+                  \begin{align*}
+                  dh_{prev} = \frac{\partial L}{\partial h_{t-1}} &= W_{hf}^\top \cdot \frac{\partial L}{\partial f_t} \odot (f_t \odot (1 - f_t)) \\
+                  &+ W_{hi}^\top \cdot \frac{\partial L}{\partial i_t} \odot (i_t \odot (1 - i_t)) \\ 
+                  &+ W_{hc}^\top \cdot \frac{\partial L}{\partial \tilde{c}_t} \odot (1 - \tilde{c}_t^2) \\
+                  &+ W_{ho}^\top \cdot \frac{\partial L}{\partial o_t} \odot (o_t \odot (1 - o_t))
+                  \end{align*}
+                  <p>
+                    Here $W_{h*}$ represent the first $d_h$ columns of $W_*$, where $d_h$ is the dimension of the hidden outputs.
+                  </p>
+                </ol>
+              </p>
+
+              <p>
+                The gradients computed as $dc_{prev}$ and $dh_{prev}$ at timestep $t$ will act as $dc_{next}$ and $dh_{next}$ in the previous timestep $t-1$.
+              </p>
+
+              <h3>Code for LSTM cell</h3>
+
+              <p>
+                This section shows the implementation of the model formulted above.
+              </p>
+
+              <p>
+                In order to comply with the atrributes of the Layer API, LSTM exposes a single weight (<code>W</code>) marix and a single bias (<code>b</code>) matrix. But the layer internally slices these matrices to obtain the corresponding weights and biases for each gate and state. Also a point to highlight is the fact that LSTMs require a 0th hidden output and cell state to start processing. To accomodate for this fact in this implementaiton all matrices have an extra timestep at the 0th index that does not correspond to any of the input timesteps. Adding of this extra timestep also results in some simplifications during the backpropagation.
+              </p>
+
+              <p>
+                All weights used in the LSTM layer follow the shapes of <code>out_dim x inp_dim</code> and outputs follow the shapes <code>N x T x out_dim</code>, where <code>N</code> is the number of input data points, <code>T</code> is the sequence length.
+              </p>
+
+              <pre><code class="language-python line-numbers">def forward(self, X, y=None, W=None, b=None):
+    # Extracting weight matrices and bias terms for each gate
+    self.Wf = self.W[:self.out_dim, :]
+    self.Wi = self.W[self.out_dim: 2 * self.out_dim, :]
+    self.Wo = self.W[2 * self.out_dim: 3 * self.out_dim, :]
+    self.Wc = self.W[3 * self.out_dim:, :]
+
+    self.bf = self.b[0]
+    self.bi = self.b[1]
+    self.bo = self.b[2]
+    self.bc = self.b[3]
+    
+    # Handling input in dictionary format when the previous layer passes sequence lengths
+    if isinstance(X, dict):
+        X_ = X
+        X = X_['input_ids']
+        mask = X_.get('seq_lens', np.array(X.shape[1]).repeat(X.shape[0]))
+    else:
+        mask = np.array(X.shape[1]).repeat(X.shape[0])
+
+    # Initialization of gates, states and output for the inputs 
+    # (shapes: N x T x out_dim)
+    fg = np.zeros((X.shape[0], X.shape[1] + 1, self.out_dim))
+    ig = np.zeros((X.shape[0], X.shape[1] + 1, self.out_dim))
+    og = np.zeros((X.shape[0], X.shape[1] + 1, self.out_dim))
+    pstate = np.zeros((X.shape[0], X.shape[1] + 1, self.out_dim))
+    state = np.zeros((X.shape[0], X.shape[1] + 1, self.out_dim))
+    out = np.zeros((X.shape[0], X.shape[1] + 1, self.out_dim))
+    X = np.concatenate([np.zeros((X.shape[0], 1, X.shape[2])), X], axis=1) # shape of X is (N, T, d)
+    self.X = X
+    self.mask = mask
+
+    # Forward pass through each timestep
+    for t in range(1, X.shape[1]):
+        # Compute forget gate, input gate, candidate memory, output gate and hidden output values
+        fg[:, t, :] = self.sigmoid(np.dot(np.hstack([out[:, t - 1, :], X[:, t, :]]), self.Wf.T) + self.bf)
+        ig[:, t, :] = self.sigmoid(np.dot(np.hstack([out[:, t - 1, :], X[:, t, :]]), self.Wi.T) + self.bi)
+        pstate[:, t, :] = np.tanh(np.dot(np.hstack([out[:, t - 1, :], X[:, t, :]]), self.Wc.T) + self.bc)
+        state[:, t, :] = fg[:, t, :] * state[:, t - 1, :] + ig[:, t, :] * pstate[:, t, :]
+        og[:, t, :] = self.sigmoid(np.dot(np.hstack([out[:, t - 1, :], X[:, t, :]]), self.Wo.T) + self.bo)
+        out[:, t, :] = og[:, t, :] * np.tanh(state[:, t, :])
+
+    # Save results to use in backpropagation
+    self.fg = fg
+    self.ig = ig
+    self.og = og
+    self.pstate = pstate
+    self.state = state
+    self.out = out
+
+    # Return the final output based on layer configuration
+    out = out[:, 1:, :] if self.return_seq else out[np.arange(X.shape[0]), mask, :]
+    return {'input_ids': out, 'seq_lens': mask} if self.return_mask else out</code></pre>
+
+              <p>
+                In implementation of the <code>backward</code> method of the LSTM layer, there are several crucial aspects that require attention to ensure proper backpropagation through time. Firstly, the handling of the <code>return_seq</code> parameter is essential. This parameter dictates whether the LSTM layer returns sequences or only the final output. The conditional check ensures that gradients <code>dO</code> are appropriately adjusted if <code>return_seq</code> is set to <code>False</code>. This adjustment is crucial to match the dimensions of the output during the backward pass, aligning with the behavior specified by the user.
+              </p>
+
+              <p>
+                Secondly, the order of operations is important in the backward pass through timesteps. The loop iterates in reverse order through each timestep, allowing the gradients to be properly backpropagated from the current timestep to the previous one. The gradients for the cell state (<code>dstate</code>) are updated first, considering the influence of the output and activation functions. The subsequent updates to weights and biases are calculated with respect to these gradients, ensuring a coherent and accurate computation of the gradients. Additionally, the final step involves combining these gradients, applying regularization, and addressing potential issues with masked gradients for padded values.
+              </p>
+
+              <p>
+                The handling of the <code>mask</code> variable addresses the challenge of padded sequences. It ensures that gradients corresponding to padded values are appropriately set to zero, preventing them from influencing the weight updates. Additionally, the final gradients are assembled, incorporating regularization terms to control overfitting. This careful orchestration of operations is crucial for the LSTM layer to learn effectively during training and to guarantee accurate weight updates during backpropagation through time.
+              </p>
+
+              <pre><code class="language-python line-numbers">def backward(self, dO):
+    # Adjusting gradients if return_seq is False
+    if not self.return_seq:
+        dO_ = np.zeros_like(self.out)
+        dO_[np.arange(self.X.shape[0]), self.mask, :] = dO
+        dO = dO_
+    else:
+        dO = np.concatenate([np.zeros((dO.shape[0], 1, dO.shape[2])), dO], axis=1)
+
+    # Initializing gradient matrices
+    dstate = np.zeros_like(self.state)
+    dWo = np.zeros_like(self.Wo)
+    dWi = np.zeros_like(self.Wi)
+    dWf = np.zeros_like(self.Wf)
+    dWc = np.zeros_like(self.Wc)
+    dbf = np.zeros_like(self.bf)
+    dbi = np.zeros_like(self.bi)
+    dbo = np.zeros_like(self.bo)
+    dbc = np.zeros_like(self.bc)
+    dX = np.zeros_like(self.X)
+    mask = np.arange(self.X.shape[1]) > self.mask[:, np.newaxis]
+
+    # Backward pass through each timestep
+    for t in range(self.X.shape[1] - 1, 0, -1):
+        # update gradient for the cell state (dstate)
+        dstate[:, t, :] += dO[:, t, :] * self.og[:, t, :] * (1 - np.square(np.tanh(self.state[:, t, :])))
+
+        # compute gradient for the previous cell state (dc_prev)
+        dstate[:, t - 1, :] = dstate[:, t, :] * self.fg[:, t, :]
+
+        # Update gradients for weights related to the output gate (dWo)
+        dWo += np.dot((dO[:, t, :] * np.tanh(self.state[:, t, :]) * self.og[:, t, :] * (1 - self.og[:, t, :])).T, 
+                      np.hstack([self.out[:, t, :], self.X[:, t, :]]))
+
+        # Update gradients for weights related to the input gate (dWi)
+        dWi += np.dot((dstate[:, t, :] * self.pstate[:, t, :] * self.ig[:, t, :] * (1 - self.ig[:, t, :])).T, 
+                      np.hstack([self.out[:, t, :], self.X[:, t, :]]))
+
+        # Update gradients for weights related to the forget gate (dWf)
+        dWf += np.dot((dstate[:, t, :] * self.state[:, t - 1, :] * self.fg[:, t, :] * (1 - self.fg[:, t, :])).T, 
+                      np.hstack([self.out[:, t, :], self.X[:, t, :]]))
+        
+        # Update gradients for weights related to the cell state (dWc)
+        dWc += np.dot((dstate[:, t, :] * self.ig[:, t, :] * (1 - np.square(self.pstate[:, t, :]))).T,
+                      np.hstack([self.out[:, t, :], self.X[:, t, :]]))
+
+        # Update gradient for the output of the previous timestep (dh_prev)
+        dO[:, t - 1, :] += np.dot(dstate[:, t, :] * self.ig[:, t, :] * (1 - np.square(self.pstate[:, t, :])), self.Wc[:, :self.out_dim])\
+                        + np.dot(dstate[:, t, :] * self.state[:, t - 1, :] * self.fg[:, t, :] * (1 - self.fg[:, t, :]), self.Wf[:, :self.out_dim])\
+                        + np.dot(dstate[:, t, :] * self.pstate[:, t, :] * self.ig[:, t, :] * (1 - self.ig[:, t, :]), self.Wi[:, :self.out_dim])\
+                        + np.dot(dO[:, t, :] * np.tanh(self.state[:, t, :]) * self.og[:, t, :] * (1 - self.og[:, t, :]), self.Wo[:, :self.out_dim])
+        
+        # Update gradient for the input of the current timestep (dX)
+        dX[:, t, :] = np.dot(dstate[:, t, :] * self.ig[:, t, :] * (1 - np.square(self.pstate[:, t, :])), self.Wc[:, self.out_dim:])\
+                    + np.dot(dstate[:, t, :] * self.state[:, t - 1, :] * self.fg[:, t, :] * (1 - self.fg[:, t, :]), self.Wf[:, self.out_dim:])\
+                    + np.dot(dstate[:, t, :] * self.pstate[:, t, :] * self.ig[:, t, :] * (1 - self.ig[:, t, :]), self.Wi[:, self.out_dim:])\
+                    + np.dot(dO[:, t, :] * np.tanh(self.state[:, t, :]) * self.og[:, t, :] * (1 - self.og[:, t, :]), self.Wo[:, self.out_dim:])
+
+        # Update gradients for biases
+        dbo += (dO[:, t, :] * np.tanh(self.state[:, t, :]) * self.og[:, t, :] * (1 - self.og[:, t, :])).sum(axis=0)
+        dbi += (dstate[:, t, :] * self.pstate[:, t, :] * self.ig[:, t, :] * (1 - self.ig[:, t, :])).sum(axis=0)
+        dbf += (dstate[:, t, :] * self.state[:, t - 1, :] * self.fg[:, t, :] * (1 - self.fg[:, t, :])).sum(axis=0)
+        dbc += (dstate[:, t, :] * self.ig[:, t, :] * (1 - np.square(self.pstate[:, t, :]))).sum(axis=0)
+
+    # Combine gradients and add regularization
+    dW = np.vstack([dWf, dWi, dWo, dWc]) + self.reg * self.W
+    db = np.vstack([dbf, dbi, dbo, dbc])
+    
+    # Masking gradients for padded values
+    dX[mask, :] = 0
+    
+    return (dX[:, 1:, :], dW, db)</code></pre>
+
+              
+              <h3>Miscellaneous Details</h3>
+
+              <h4>Sequence mask</h4>
 
               <p>
                 The data was initially cleaned and prepared in <a href="dataprep.html">Data Prep</a> and <a href="clustering.html#:~:text=Text%20Data%20(TFIDF)-,Data%20Preparation%20and%20code,-Here%20we%20do">Clustering</a> parts. The data used in this part is the TFIDF vectorized review text with product category (part 1) and user rating (part 2) as labels. The TFIDF features are not standardized for using with Neural Netwroks (NNs) in this part. The reason to this was explained in the SVM section and is linked <a href="svm.html#:~:text=using%20unscaled%20data%20improved%20the%20performance" target="_blank">here</a>. The dataset is also filtered for removing highly improbable classes and classes with high overlaps.
